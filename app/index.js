@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Navigator } from 'react-native';
 import Landing from './components/Landing';
-import SoundPlayer from './components/sound/SoundPlayer';
+import StoryPlayer from './components/story/StoryPlayer';
 
 var ROUTES = {
   Landing: Landing,
-  SoundPlayer: SoundPlayer
+  StoryPlayer: StoryPlayer
 }
 
 export default class App extends Component {

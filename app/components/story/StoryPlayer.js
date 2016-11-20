@@ -1,54 +1,49 @@
 import React, { Component } from 'react';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
-import test from './Sound'
+import {Story} from './Story'
 import Dimensions from 'Dimensions';
 import RNFetchBlob from 'react-native-fetch-blob'
+import { ReactNativeAudioStreaming } from 'react-native-audio-streaming';
+import { Player } from 'react-native-audio-streaming';
 
 
-// https://storage.googleapis.com/storybox-pdx/cde9b773-fb43-4d6c-9b8b-5813117c436a.mp3
 
-export default class Player extends Component {
+export default class StoryPlayer extends Component {
   constructor (props) {
     super(props)
     this.state ={
+      storyCreated: false,
       playing: false
     }
   }
+
   componentWillMount() {
-    RNFetchBlob
-        .config({
-          // DCIMDir is in external storage
-          path : RNFetchBlob.fs.dirs.MusicDir + '/test.mp3'
-        })
-        .fetch('GET', 'https://storage.googleapis.com/storybox-pdx/cde9b773-fb43-4d6c-9b8b-5813117c436a.mp3')
-        .then((res) => {
-          console.log('The file saved to ', res.path())
-          return RNFetchBlob.fs.scanFile([ { path : res.path(), mime : 'audio/mpeg' } ])
-        })
-        .then(() => {
-          // scan file success
-        })
-        .catch((err) => {
-          // scan file error
-        })
+    global.story = new Story('test.mp3', 'https://storage.googleapis.com/storybox-pdx/cde9b773-fb43-4d6c-9b8b-5813117c436a.mp3');
+    story.fetch().then(() => {
+      story.create()
+    });
   }
 
+
   _onPressButton() {
-    if(!this.state.playing) {
-      test.play((success) => {
-        if (success) {
-          console.log('successfully finished playing');
-        } else {
-          console.log('playback failed due to audio decoding errors');
-        }
-      });
-      this.setState({playing: true})
-      console.log(this.state, 'should be playing!')
-    } else {
-      test.stop();
-      this.setState({playing: false})
-      console.log(this.state, 'should not be playing!')
-    }
+      if(!this.state.playing) {
+        this.setState({playing: true})
+        setTimeout(() => {
+        story.soundControl.play((success) => {
+          if (success) {
+            console.log('successfully finished playing');
+          } else {
+            console.log('playback failed due to audio decoding errors');
+          }
+        });
+        console.log(this.state, 'should be playing!')
+        }, 5000)
+      } else {
+        this.setState({playing: false});
+        story.soundControl.stop();
+        console.log(this.state, 'should not be playing!')
+      }
+
   }
 
 

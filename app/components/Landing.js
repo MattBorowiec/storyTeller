@@ -3,9 +3,6 @@ import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import Dimensions from 'Dimensions';
 
 
-
-// https://storage.googleapis.com/storybox-pdx/cde9b773-fb43-4d6c-9b8b-5813117c436a.mp3
-
 export default class Landing extends Component {
   constructor (props) {
     super(props)
@@ -15,7 +12,7 @@ export default class Landing extends Component {
   }
 
   _onPressButton() {
-    this.props.navigator.push({name: 'SoundPlayer'})
+    this.props.navigator.push({name: 'StoryPlayer'})
   }
 
 
@@ -29,7 +26,7 @@ export default class Landing extends Component {
             <Text style={[styles.text, {fontSize: 35, marginBottom: 50}]}>Everyone deserves to be heard.
               Stories Connect us.</Text>
             <TouchableOpacity onPress={this._onPressButton.bind(this)}>
-              <Text style={[styles.text, styles.listenButton]}>Tap to record yours.</Text>
+              <Text style={[styles.text, styles.listenButton]}>Tap to listen.</Text>
             </TouchableOpacity>
           </View>
         </View>

@@ -141,6 +141,8 @@ dependencies {
     compile "com.facebook.react:react-native:+"  // From node_modules
     compile project(':RNSound')
     compile project(':react-native-fs')
+    compile project(':react-native-audio-streaming')
+
 }
 
 // Run this once to be able to run the application with BUCK
