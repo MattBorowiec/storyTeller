@@ -1,27 +1,19 @@
 import React, { Component } from 'react';
-import { Navigator } from 'react-native';
-import Landing from './components/Landing';
-import StoryPlayer from './components/story/StoryPlayer';
+import {Provider} from 'react-redux';
+import { createStore} from 'redux';
+import  Navigator  from './navigator/navigator';
 
-var ROUTES = {
-  Landing: Landing,
-  StoryPlayer: StoryPlayer
-}
+const store = createStore();
 
 export default class App extends Component {
-  renderScene(route, navigator) {
-    var Component = ROUTES[route.name];
-    return <Component route={route} navigator={navigator}/>
+  constructor(props) {
+    super(props)
   }
   render() {
     return (
-        <Navigator
-            initialRoute={{ name: 'Landing'}}
-            renderScene={this.renderScene}
-            configureScene={() => {
-              return Navigator.SceneConfigs.FadeAndroid
-            }}
-        />
+        <Provider store={store}>
+          <Navigator/>
+        </Provider>
     );
   }
 }
