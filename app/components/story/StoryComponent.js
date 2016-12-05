@@ -18,21 +18,22 @@ class StoryComponent extends Component {
   }
 
   componentWillMount() {
+    console.log(this.props);
     RNFetchBlob
         .config({
           fileCache : true,
         })
         .fetch('GET', this.props.url)
         .then((res) => {
-          console.log('The file saved to ', res.path());
+          // console.log('The file saved to ', res.path());
           this.setState({path: res.path()});
           return RNFetchBlob.fs.scanFile([ { path : res.path(), mime : 'audio/mpeg' } ])
         }).then(() => {
           this.sound = new Sound(this.state.path, '', (error) => {
             if (error) {
-              console.log('failed to load the sound', error);
+              // console.log('failed to load the sound', error);
             } else {
-              console.log('success, audio length is ' + this.sound.getDuration());
+              // console.log('success, audio length is ' + this.sound.getDuration());
               this.setState({loading: false, length: this.sound.getDuration()});
             }
           });

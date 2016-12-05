@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import Dimensions from 'Dimensions';
+import { Actions } from 'react-native-router-flux';
 
 
-export default class Landing extends Component {
+
+class Landing extends Component {
   constructor (props) {
     super(props)
   }
-  componentWillMount() {
 
+
+  componentDidUpdate() {
+    // console.log(this.props);
   }
 
   _onPressButton() {
-    this.props.navigator.push({name: 'StoryPlayer'})
+    // this.props.navigator.push({name: 'StoryPlayer'})
+    Actions.StoryPlayer();
   }
 
 
@@ -63,3 +69,11 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width
   }
 });
+
+const mapStateToProps = (state) => {
+  return {
+    state: state,
+  }
+};
+
+export default connect(mapStateToProps)(Landing);

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, Image, Text, TouchableOpacity, Slider } from 'react-native';
+import { View, Image, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
 import StoryComponent from './StoryComponent.js'
 import Dimensions from 'Dimensions';
 
 
 
-export default class StoryPlayer extends Component {
+ class StoryContainer extends Component {
   constructor (props) {
     super(props);
     this.state ={
@@ -14,12 +15,21 @@ export default class StoryPlayer extends Component {
     }
   }
 
+  renderStoryComponents() {
+    console.log(this.props.stories);
+    return this.props.stories.map((story, i) => <View><StoryComponent key={story} url={story.public_url}/></View>)
+  }
+
 
   render() {
     return (
         <View style={styles.playerContainer}>
           <Image source={require('../../../img/mouth.png')} style={styles.backgroundImage}/>
-          <StoryComponent url={'https://storage.googleapis.com/storybox-pdx/cde9b773-fb43-4d6c-9b8b-5813117c436a.mp3'} />
+          <ScrollView
+            horizontal={true}
+          >
+          {this.renderStoryComponents()}
+          </ScrollView>
         </View>
     );
   }
@@ -45,3 +55,12 @@ const styles = {
     bottom: 0
   }
 };
+
+
+const mapStateToProps = (state) => {
+  return {
+    stories: state.get('stories'),
+  }
+};
+
+export default connect(mapStateToProps)(StoryContainer);
