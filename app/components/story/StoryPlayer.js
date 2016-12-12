@@ -16,8 +16,7 @@ import Dimensions from 'Dimensions';
   }
 
   renderStoryComponents() {
-    console.log(this.props.stories);
-    return this.props.stories.map((story, i) => <View><StoryComponent key={story} url={story.public_url}/></View>)
+    return this.props.stories.map((story, i) => <StoryComponent key={story.public_url} index={i} url={story.public_url}/>)
   }
 
 

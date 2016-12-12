@@ -9,8 +9,8 @@ class StoryComponent extends Component {
     super(props);
     this.sound = false;
     this.res = null;
+    this.path = null;
     this.state = {
-      path: null,
       length: null,
       loading: true,
       playing: false
@@ -18,22 +18,24 @@ class StoryComponent extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props);
+    // console.log(this.props);
     RNFetchBlob
         .config({
           fileCache : true,
         })
         .fetch('GET', this.props.url)
         .then((res) => {
+          // res.flush();
           // console.log('The file saved to ', res.path());
-          this.setState({path: res.path()});
+          this.path = res.path();
           return RNFetchBlob.fs.scanFile([ { path : res.path(), mime : 'audio/mpeg' } ])
-        }).then(() => {
-          this.sound = new Sound(this.state.path, '', (error) => {
+        })
+        .then(() => {
+          this.sound = new Sound(this.path, '', (error) => {
             if (error) {
-              // console.log('failed to load the sound', error);
+              console.log('failed to load the sound from path ', this.props.url, error);
             } else {
-              // console.log('success, audio length is ' + this.sound.getDuration());
+              console.log('success, audio length is ' + 'url is ' + this.props.url, this.sound.getDuration());
               this.setState({loading: false, length: this.sound.getDuration()});
             }
           });
@@ -64,11 +66,13 @@ class StoryComponent extends Component {
       />
     }
     return (
-        <TouchableOpacity onPress={this.play.bind(this)}>
-          <Image
-              style={styles.button}
-              source={playUri}/>
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity onPress={this.play.bind(this)}>
+            <Image
+                style={styles.button}
+                source={playUri}/>
+          </TouchableOpacity>
+        </View>
     );
   };
 };
