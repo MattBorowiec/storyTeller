@@ -17,8 +17,7 @@ class Landing extends Component {
   }
 
   _onPressButton() {
-    // this.props.navigator.push({name: 'StoryPlayer'})
-    Actions.StoryPlayer();
+    Actions.StoryList();
   }
 
 

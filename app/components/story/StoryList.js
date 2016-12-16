@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { View, Image, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
+import StoryComponent from './StoryComponent.js'
 import Dimensions from 'Dimensions';
 
 
 
- class StoryPlayer extends Component {
+
+ class StoryContainer extends Component {
   constructor (props) {
     super(props);
     this.state ={
@@ -14,33 +16,21 @@ import Dimensions from 'Dimensions';
     }
   }
 
-  componentDidMount() {
-    console.log(this.props.sound)
+  renderStoryComponents() {
+    return this.props.stories.map((story, i) => <StoryComponent key={story.public_url} name={'story' + i} index={i} url={story.public_url}/>)
   }
-
-   play() {
-     if(!this.state.playing) {
-       this.props.sound.play(() => {console.log('done playing!')});
-       this.setState({playing: true})
-     } else {
-       this.props.sound.pause();
-       this.setState({playing: false});
-     }
-   };
 
 
   render() {
-    const play = require('../../../img/play-icon.png');
-    const pause = require('../../../img/pause-red.png');
-    let playUri = !this.state.playing ? play : pause;
     return (
-          <View>
-            <TouchableOpacity onPress={this.play.bind(this)}>
-              <Image
-                  style={styles.button}
-                  source={playUri}/>
-            </TouchableOpacity>
-          </View>
+        <View style={styles.playerContainer}>
+          <Image source={require('../../../img/mouth.png')} style={styles.backgroundImage}/>
+          <ScrollView
+            horizontal={true}
+          >
+          {this.renderStoryComponents()}
+          </ScrollView>
+        </View>
     );
   }
 }
@@ -53,11 +43,6 @@ const styles = {
     justifyContent: 'center',
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
-  },
-  button: {
-    height: 200,
-    width: 200,
-    zIndex: 1
   },
   backgroundImage: {
     alignSelf: 'center',
@@ -78,4 +63,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps)(StoryPlayer);
+export default connect(mapStateToProps)(StoryContainer);

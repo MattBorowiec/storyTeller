@@ -3,15 +3,15 @@ import React, { Component } from 'react';
 import Dimensions from 'Dimensions';
 import RNFetchBlob from 'react-native-fetch-blob'
 import Sound from 'react-native-sound';
+import { Actions } from 'react-native-router-flux';
+
 
 class StoryComponent extends Component {
   constructor (props) {
     super(props);
     this.sound = false;
-    this.res = null;
     this.path = null;
     this.state = {
-      length: null,
       loading: true,
       playing: false
     };
@@ -21,12 +21,11 @@ class StoryComponent extends Component {
     // console.log(this.props);
     RNFetchBlob
         .config({
-          fileCache : true,
+          // fileCache : true
+          path: RNFetchBlob.fs.dirs.CacheDir + this.props.name
         })
         .fetch('GET', this.props.url)
         .then((res) => {
-          // res.flush();
-          // console.log('The file saved to ', res.path());
           this.path = res.path();
           return RNFetchBlob.fs.scanFile([ { path : res.path(), mime : 'audio/mpeg' } ])
         })
@@ -38,25 +37,21 @@ class StoryComponent extends Component {
               console.log('success, audio length is ' + 'url is ' + this.props.url, this.sound.getDuration());
               this.setState({loading: false, length: this.sound.getDuration()});
             }
-          });
-    })
+          })
+        })
+        .catch((errorMessage) => {
+          console.log(errorMessage);
+        });
   }
 
-  play() {
-    if(!this.state.playing) {
-      this.sound.play(() => {console.log('done playing!')});
-      this.setState({playing: true})
-    } else {
-      this.sound.pause();
-      this.setState({playing: false});
-    }
-  };
+
+  onPress(){
+    console.log(this.sound);
+    Actions.StoryPlayer({sound: this.sound});
+  }
 
 
   render() {
-    const play = require('../../../img/play-icon.png');
-    const pause = require('../../../img/pause-red.png');
-    let playUri = !this.state.playing ? play : pause;
     if (this.state.loading){
      return <ActivityIndicator
           animating={true}
@@ -65,12 +60,23 @@ class StoryComponent extends Component {
           size={100}
       />
     }
+
     return (
         <View>
-          <TouchableOpacity onPress={this.play.bind(this)}>
-            <Image
-                style={styles.button}
-                source={playUri}/>
+          <TouchableOpacity
+              onPress={this.onPress.bind(this)}
+              style={{borderWidth: 2, borderColor: 'green'}}
+          >
+          <View style={{borderWidth: 2, borderColor: 'green', height: Dimensions.get('window').height/2.5, margin: 10, width: Dimensions.get('window').width/4}}>
+            <Text style={{flex: 3}}>Here is where some blurb about the story goes. Blurb blurb... Blurb</Text>
+            <View style={{ flex: 1, flexDirection: 'row', borderWidth: 2, borderColor: 'green', alignItems: 'flex-end'}}>
+
+              <Image
+                  style={styles.button}
+                  source={require('../../../img/gray-play.png')}/>
+            <Text style={styles.soundLength}>{this.sound.getDuration()}</Text>
+            </View>
+          </View>
           </TouchableOpacity>
         </View>
     );
@@ -80,9 +86,13 @@ class StoryComponent extends Component {
 
 const styles = {
   button: {
-    height: 200,
-    width: 200,
-    zIndex: 1
+    height: 50,
+    width: 50,
+    zIndex: 1,
+  },
+  soundLength: {
+    color: 'green',
+    fontSize: 20
   }
 };
 
