@@ -40,7 +40,6 @@ class Landing extends Component {
   }
 }
 
-
 const styles = StyleSheet.create({
   text: {
     color: '#d3d9df',

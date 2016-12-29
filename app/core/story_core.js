@@ -1,11 +1,9 @@
-
 export function setStories(state, stories) {
   return state.set('stories', stories);
 }
 
 
-
-export function fetchStories(){
+export function fetchStories() {
   return fetch('https://storybox-145021.appspot.com/api/audio/list', {
     method: 'get',
   }).then((res) => {
