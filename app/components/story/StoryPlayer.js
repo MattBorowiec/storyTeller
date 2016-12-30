@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Dimensions from 'Dimensions';
 import RNFetchBlob from 'react-native-fetch-blob'
 import Sound from 'react-native-sound';
+import { Actions } from 'react-native-router-flux';
+
 
 
 class StoryPlayer extends Component {
@@ -43,12 +45,17 @@ class StoryPlayer extends Component {
 
     play() {
         if (!this.state.playing) {
+            this.sound.play();
             this.setState({playing: true})
         } else {
             this.sound.pause();
             this.setState({playing: false});
         }
     };
+
+    close() {
+        Actions.StoryList({});
+    }
 
     render() {
         const play = require('../../../img/gray-play.png');
@@ -73,7 +80,7 @@ class StoryPlayer extends Component {
                     <Text style={styles.whenLabel}>WHEN:
                         <Text style={styles.location}>$PLACEHOLDER</Text>
                     </Text>
-                    <TouchableOpacity style={styles.closeContainer} onPress={this.play.bind(this)}>
+                    <TouchableOpacity style={styles.closeContainer} onPress={this.close.bind(this)}>
                         <Text style={styles.closePlayer}>X</Text>
                     </TouchableOpacity>
                 </View>
@@ -86,7 +93,7 @@ class StoryPlayer extends Component {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.audioTrackingContainer}>
-                    <Text>TODO Remove this.{this.props.url}</Text>
+                    <Text style={{fontSize: 50, color: "white"}}>TODO placeholder for playing animation.</Text>
                 </View>
             </View>
         );
@@ -146,9 +153,11 @@ const styles = {
         top: 0,
         right: 0,
     },
-    audioTrackingContainer : {
-        backgroundColor: "white",
-        height: 250
+    audioTrackingContainer: {
+        backgroundColor: "red",
+        height: 250,
+        justifyContent: "center",
+        alignItems: "center",
 
     }
 
