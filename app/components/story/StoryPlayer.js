@@ -7,7 +7,6 @@ import Sound from 'react-native-sound';
 import { Actions } from 'react-native-router-flux';
 
 
-
 class StoryPlayer extends Component {
     constructor(props) {
         super(props);
@@ -61,6 +60,8 @@ class StoryPlayer extends Component {
         const play = require('../../../img/gray-play.png');
         const pause = require('../../../img/pause-red.png');
         let playUri = !this.state.playing ? play : pause;
+        let playImg = !this.state.playing ? require('../../../img/sound-wave.gif') : require('../../../img/sound-wave.png');
+
 
         if (this.state.loading) {
             return <ActivityIndicator
@@ -93,7 +94,9 @@ class StoryPlayer extends Component {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.audioTrackingContainer}>
-                    <Text style={{fontSize: 50, color: "white"}}>TODO placeholder for playing animation.</Text>
+                    <Image
+                        style={styles.playingImg}
+                        source={playImg}/>
                 </View>
             </View>
         );
@@ -159,7 +162,8 @@ const styles = {
         justifyContent: "center",
         alignItems: "center",
 
-    }
+    },
+    playingImg: {}
 
 };
 
