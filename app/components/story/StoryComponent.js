@@ -11,7 +11,7 @@ class StoryComponent extends Component {
   }
 
   onPress() {
-    Actions.StoryPlayer({url: this.props.url, name: this.props.name});
+    Actions.StoryPlayer({url: this.props.url, name: this.props.name, eventLocation: '  Spaceness', eventTime: '  gsFebruary 32nd, 3017'});
   }
 
   render() {
