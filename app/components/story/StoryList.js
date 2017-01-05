@@ -91,7 +91,10 @@ class StoryContainer extends Component {
                         <Text></Text>
                         <Text></Text>
                         <Text></Text>
-                        <Text style={styles.footerText}>curiousear.com</Text>
+                        <View style={{borderTopColor: "white", borderTopWidth: 1}}>
+                            <Text></Text>
+                            <Text style={styles.footerText}>curiousear.com</Text>
+                        </View>
                     </View>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity
