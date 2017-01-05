@@ -53,6 +53,8 @@ class StoryPlayer extends Component {
     };
 
     close() {
+        this.sound.pause();
+        this.setState({playing: false});
         Actions.StoryList({});
     }
 

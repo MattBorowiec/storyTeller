@@ -3,6 +3,7 @@ import { View, Image, Text, TouchableOpacity, ScrollView, Animated, Easing, Aler
 import { connect } from 'react-redux';
 import StoryComponent from './StoryComponent.js'
 import Dimensions from 'Dimensions';
+import  Hr from 'react-native-hr';
 
 
 class StoryContainer extends Component {
@@ -101,7 +102,13 @@ class StoryContainer extends Component {
                         </TouchableOpacity>
                     </View>
                 </Animated.View>
+                <Text>
+                    <Text style={styles.eventLocation}>Event Location</Text>--
+                    <Text style={styles.eventTime}>Event Time</Text>
+                </Text>
+                <Hr lineColor="#7a7c7f" />
                 <ScrollView
+                    style={styles.scrollContainer}
                     horizontal={true}
                 >
                     {this.renderStoryComponents()}
@@ -164,11 +171,11 @@ const styles = {
     },
     infoTextBody: {
         color: "white",
-        fontSize: 20,
+        fontSize: 20
     },
     learnMoreContainer: {
         borderColor: "white",
-        borderWidth: 2,
+        borderWidth: 2
     },
     learnMoreText: {
         color: "white",
@@ -179,7 +186,18 @@ const styles = {
     footerText: {
         color: "white",
         textAlign: "center"
-
+    },
+    eventLocation: {
+        color: "black",
+        fontSize: 25,
+        fontWeight: "bold"
+    },
+    eventTime: {
+        color: "black",
+        fontSize: 20
+    },
+    scrollContainer: {
+        paddingLeft: 40
     }
 };
 
