@@ -73,7 +73,7 @@ const styles = {
         backgroundColor: "white"
     },
     soundBlurb: {
-        color: 'gray',
+        color: 'dimgray',
         fontSize: 18,
         backgroundColor: "white",
         textAlign: "center"
