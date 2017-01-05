@@ -60,7 +60,7 @@ class StoryPlayer extends Component {
         const play = require('../../../img/gray-play.png');
         const pause = require('../../../img/pause-red.png');
         let playUri = !this.state.playing ? play : pause;
-        let playImg = !this.state.playing ? '' : require('../../../img/sound-wave.png');
+        let playImg = this.state.playing ? require('../../../img/sound-wave.gif') : require('../../../img/sound-wave.png');
 
 
         if (this.state.loading) {
@@ -113,7 +113,6 @@ const styles = {
         height: 150,
         width: 150,
         flex: 2,
-        zIndex: 0,
         left: (Dimensions.get('window').width / 2) - 75,
 
     },
@@ -129,7 +128,7 @@ const styles = {
         color: "black",
         left: 20,
         top: 20,
-        fontSize: 25,
+        fontSize: 25
     },
     location: {
         fontWeight: "bold"
@@ -154,7 +153,7 @@ const styles = {
         borderWidth: 1,
         borderColor: "gray",
         top: 0,
-        right: 0,
+        right: 0
     },
     audioTrackingContainer: {
         justifyContent: "center",
