@@ -13,10 +13,8 @@ class Landing extends Component {
     _onPressButton() {
         Actions.StoryList();
     }
-
-
+    
     render() {
-        const play = require('../../img/play-icon.png');
         return (
             <View>
                 <TouchableHighlight onPress={this._onPressButton.bind(this)}>
