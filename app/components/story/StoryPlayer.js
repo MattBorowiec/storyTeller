@@ -10,7 +10,10 @@ import { Actions } from 'react-native-router-flux';
 class StoryPlayer extends Component {
     constructor(props) {
         super(props);
-        this.sound = null;
+        this.sound = {
+            blob: null,
+            path: ""
+        };
         this.state = {
             loading: true,
             playing: false
@@ -24,16 +27,16 @@ class StoryPlayer extends Component {
             })
             .fetch('GET', this.props.url)
             .then((res) => {
-                this.path = res.path();
+                this.sound.path = res.path();
                 return RNFetchBlob.fs.scanFile([{path: res.path(), mime: 'audio/mpeg'}])
             })
             .then(() => {
-                this.sound = new Sound(this.path, '', (error) => {
+                this.sound.blob = new Sound(this.sound.path, '', (error) => {
                     if (error) {
                         console.log('failed to load the sound from path ', this.props.url, error);
                     } else {
-                        console.log('success, audio length is ' + 'url is ' + this.props.url, this.sound.getDuration());
-                        this.setState({loading: false, length: this.sound.getDuration()});
+                        console.log('success, audio length is ' + 'url is ' + this.props.url, this.sound.blob.getDuration());
+                        this.setState({loading: false, length: this.sound.blob.getDuration()});
                     }
                 })
             })
@@ -44,17 +47,20 @@ class StoryPlayer extends Component {
 
     play() {
         if (!this.state.playing) {
-            this.sound.play();
+            this.sound.blob.play(() => {
+                this.setState({playing: false})
+            });
             this.setState({playing: true})
         } else {
-            this.sound.pause();
+            this.sound.blob.pause();
             this.setState({playing: false});
         }
     };
 
     close() {
-        this.sound.pause();
+        this.sound.blob.pause();
         this.setState({playing: false});
+        RNFetchBlob.fs.unlink(this.sound.path);
         Actions.StoryList({});
     }
 
