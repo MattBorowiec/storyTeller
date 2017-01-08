@@ -11,7 +11,7 @@ class Landing extends Component {
     }
 
     _onPressButton() {
-        Actions.StoryList();
+        Actions.StoryDisplay();
     }
     
     render() {
