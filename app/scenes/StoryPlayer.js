@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, Text, TouchableOpacity, ScrollView,  ActivityIndicator } from 'react-native';
+import { View, Image, Text, TouchableOpacity, ScrollView,  ActivityIndicator, BackAndroid } from 'react-native';
 import { connect } from 'react-redux';
 import Dimensions from 'Dimensions';
 import RNFetchBlob from 'react-native-fetch-blob'
@@ -17,7 +17,7 @@ class StoryPlayer extends Component {
         this.state = {
             loading: true,
             playing: false
-        }
+        };
     }
 
     componentDidMount() {
@@ -38,11 +38,23 @@ class StoryPlayer extends Component {
                         console.log('success, audio length is ' + 'url is ' + this.props.url, this.sound.blob.getDuration());
                         this.setState({loading: false, length: this.sound.blob.getDuration()});
                     }
-                })
+                });
             })
             .catch((errorMessage) => {
                 console.log(errorMessage);
             });
+        BackAndroid.addEventListener('hardwareBackPress', () => {
+            return this._pressBack()
+        });
+    }
+
+    componentWillUnmount() {
+        BackAndroid.removeEventListener('hardwareBackPress');
+    }
+
+    _pressBack() {
+        RNFetchBlob.fs.unlink(this.sound.path);
+        this.sound.blob.pause();
     }
 
     play() {
@@ -59,16 +71,15 @@ class StoryPlayer extends Component {
 
     close() {
         this.sound.blob.pause();
-        this.setState({playing: false});
         RNFetchBlob.fs.unlink(this.sound.path);
-        Actions.StoryList({});
+        Actions.pop();
     }
 
     render() {
         const play = require('../../img/gray-play.png');
         const pause = require('../../img/pause-red.png');
         let playUri = !this.state.playing ? play : pause;
-        let playImg = this.state.playing ? require('../../../img/sound-wave.gif') : require('../../../img/sound-wave.png');
+        let playImg = this.state.playing ? require('../../img/sound-wave.gif') : require('../../img/sound-wave.png');
 
 
         if (this.state.loading) {
@@ -110,6 +121,7 @@ class StoryPlayer extends Component {
         );
     }
 }
+
 
 const styles = {
     container: {
