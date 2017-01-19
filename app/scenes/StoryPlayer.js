@@ -79,7 +79,7 @@ class StoryPlayer extends Component {
         const play = require('../../img/gray-play.png');
         const pause = require('../../img/pause-red.png');
         let playUri = !this.state.playing ? play : pause;
-        let playImg = this.state.playing ? require('../../img/sound-wave.gif') : require('../../img/sound-wave.png');
+        let playImg = this.state.playing ? require('../../img/wave.gif') : require('../../img/sound-wave.png');
 
 
         if (this.state.loading) {
