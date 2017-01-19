@@ -18,7 +18,7 @@ class Landing extends Component {
         return (
             <View>
                 <TouchableHighlight onPress={this._onPressButton.bind(this)}>
-                    <Image source={require('../../img/background.png')} style={styles.background}/>
+                    <Image source={require('../../img/App_LoadingMouth.gif')} style={styles.background}/>
                 </TouchableHighlight>
             </View>
         );
