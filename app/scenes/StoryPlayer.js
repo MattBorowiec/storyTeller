@@ -127,7 +127,8 @@ const styles = {
     container: {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
-        flex: 1
+        flex: 1,
+        backgroundColor: "black"
     },
     button: {
         height: 150,
@@ -141,11 +142,11 @@ const styles = {
         flex: 1
     },
     buttonContainer: {
-        flex: 1,
+        flex: 2,
         width: Dimensions.get("window").width,
     },
     whereLabel: {
-        color: "black",
+        color: "white",
         left: 20,
         top: 20,
         fontSize: 25
@@ -154,7 +155,7 @@ const styles = {
         fontWeight: "bold"
     },
     whenLabel: {
-        color: "black",
+        color: "white",
         left: 30,
         top: 15,
         fontSize: 25
@@ -176,12 +177,14 @@ const styles = {
         right: 0
     },
     audioTrackingContainer: {
-        justifyContent: "center",
-        alignItems: "center",
-        flex: 3
+        flex: 3,
+        alignItems: "center"
 
     },
-    playingImg: {}
+    playingImg: {
+        flex: 1,
+        resizeMode: "stretch"
+    }
 
 };
 
