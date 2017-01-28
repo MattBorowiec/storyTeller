@@ -27,10 +27,10 @@ class StoryContainer extends Component {
         return (
             <View style={styles.listContainer}>
                 <SideWindow />
-                <Image source={require('../../img/mouth.png')} style={styles.backgroundImage}/>
                 <ScrollView
                     style={styles.scrollContainer}
                 >
+
                     {this.renderStoryLists()}
                 </ScrollView>
             </View>
@@ -46,6 +46,7 @@ const styles = {
         justifyContent: 'center',
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
+        backgroundColor: "black"
     },
     backgroundImage: {
         alignSelf: 'center',

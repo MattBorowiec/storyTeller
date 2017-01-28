@@ -36,12 +36,12 @@ const styles = {
     paddingLeft: 40
   },
   eventLocation: {
-    color: "black",
+    color: "white",
     fontSize: 25,
     fontWeight: "bold"
   },
   eventTime: {
-    color: "black",
+    color: "white",
     fontSize: 20
   },
 };
