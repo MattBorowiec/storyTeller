@@ -14,8 +14,8 @@ class StoryComponent extends Component {
         Actions.StoryPlayer({
             url: this.props.url,
             name: this.props.name,
-            eventLocation: '  Spaceness',
-            eventTime: '  February 32nd, 3017'
+            event_time: this.props.event_time,
+            event_location: this.props.event_location
         });
     }
 
@@ -38,7 +38,7 @@ class StoryComponent extends Component {
                                     source={require('../../../img/white-play.png')}/>
                             </View>
                             <View>
-                                <Text style={styles.soundLength}>01:34:55</Text>
+                                <Text style={styles.soundLength}>{this.props.duration}</Text>
                             </View>
                         </View>
                     </View>
@@ -55,7 +55,7 @@ const styles = {
         borderWidth: 2,
         borderColor: 'gray',
         height: Dimensions.get('window').height / 2.5, margin: 10,
-        width: Dimensions.get('window').width / 4,
+        width: Dimensions.get('window').width / 4
     },
     button: {
         resizeMode: "center",

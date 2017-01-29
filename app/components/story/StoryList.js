@@ -4,46 +4,48 @@ import StoryComponent from './StoryComponent.js';
 import  Hr from 'react-native-hr';
 
 
-
 class StoryList extends Component {
 
-  renderStoryComponents(){
-    console.log(this.props.event_stories);
-    return this.props.event_stories.map((story, i) => <StoryComponent key={story.public_url} name={'story' + i} index={i} url={story.public_url}/>)
-  }
+    renderStoryComponents() {
+        return this.props.event_stories.map((story, i) => <StoryComponent key={story.public_url} name={'story' + i}
+                                                                          index={i} url={story.public_url}
+                                                                          duration={story.duration}
+                                                                          event_time={this.props.event_time}
+                                                                          event_location={this.props.event_location}/>)
+    }
 
-  render() {
-    return (
-        <View>
-          <Text>
-            <Text style={styles.eventLocation}>{this.props.event_location}</Text>
-            <Text style={styles.eventTime}>{this.props.event_time}</Text>
-          </Text>
-          <Hr lineColor="#7a7c7f" />
-          <ScrollView
-              style={styles.scrollContainer}
-              horizontal={true}
-          >
-            {this.renderStoryComponents()}
-          </ScrollView>
-        </View>
-    )
-  }
+    render() {
+        return (
+            <View>
+                <Text>
+                    <Text style={styles.eventLocation}>{this.props.event_location}</Text>
+                    <Text style={styles.eventTime}> {this.props.event_time}</Text>
+                </Text>
+                <Hr lineColor="#7a7c7f"/>
+                <ScrollView
+                    style={styles.scrollContainer}
+                    horizontal={true}
+                >
+                    {this.renderStoryComponents()}
+                </ScrollView>
+            </View>
+        )
+    }
 }
 
 const styles = {
-  scrollContainer: {
-    paddingLeft: 40
-  },
-  eventLocation: {
-    color: "white",
-    fontSize: 25,
-    fontWeight: "bold"
-  },
-  eventTime: {
-    color: "white",
-    fontSize: 20
-  },
+    scrollContainer: {
+        paddingLeft: 40
+    },
+    eventLocation: {
+        color: "white",
+        fontSize: 25,
+        fontWeight: "bold"
+    },
+    eventTime: {
+        color: "white",
+        fontSize: 20
+    },
 };
 
 export default StoryList;

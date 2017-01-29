@@ -17,13 +17,12 @@ class StoryContainer extends Component {
     }
 
     renderStoryLists() {
-        return testJson.map((event, i) => <StoryList key={i} event_time={event.event_time} event_location={event.event_location}event_stories={event.event_stories}/>);
+        return this.props.stories.map((event, i) => <StoryList key={i} event_time={event.event_time}
+                                                     event_location={event.event_location}
+                                                     event_stories={event.event_stories}/>);
     }
 
-
     render() {
-
-
         return (
             <View style={styles.listContainer}>
                 <SideWindow />

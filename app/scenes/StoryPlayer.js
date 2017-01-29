@@ -95,10 +95,10 @@ class StoryPlayer extends Component {
             <View style={styles.container}>
                 <View style={styles.headerContainer}>
                     <Text style={styles.whereLabel}>WHERE:
-                        <Text style={styles.location}>{ this.props.eventLocation}</Text>
+                        <Text style={styles.location}>{ this.props.event_location}</Text>
                     </Text>
                     <Text style={styles.whenLabel}>WHEN:
-                        <Text style={styles.location}>{this.props.eventTime}</Text>
+                        <Text style={styles.location}>{ this.props.event_time}</Text>
                     </Text>
                     <TouchableOpacity style={styles.closeContainer} onPress={this.close.bind(this)}>
                         <Text style={styles.closePlayer}>X</Text>
