@@ -149,7 +149,8 @@ const styles = {
         color: "white",
         left: 20,
         top: 20,
-        fontSize: 25
+        fontSize: 40,
+        fontFamily: "curious"
     },
     location: {
         fontWeight: "bold"
@@ -158,7 +159,8 @@ const styles = {
         color: "white",
         left: 30,
         top: 15,
-        fontSize: 25
+        fontSize: 40,
+        fontFamily: "curious"
     },
     closePlayer: {
         color: "gray",

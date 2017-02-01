@@ -17,7 +17,7 @@ class StoryList extends Component {
     render() {
         return (
             <View>
-                <Text>
+                <Text style={styles.headerText}>
                     <Text style={styles.eventLocation}>{this.props.event_location}</Text>
                     <Text style={styles.eventTime}> {this.props.event_time}</Text>
                 </Text>
@@ -37,14 +37,17 @@ const styles = {
     scrollContainer: {
         paddingLeft: 40
     },
+    headerText: {
+        fontFamily: "curious",
+    },
     eventLocation: {
         color: "white",
-        fontSize: 25,
+        fontSize: 45,
         fontWeight: "bold"
     },
     eventTime: {
         color: "white",
-        fontSize: 20
+        fontSize: 40
     },
 };
 

@@ -115,9 +115,9 @@ const styles = {
     zIndex: 2
   },
   infoTextHeader: {
-    fontSize: 25,
-    fontWeight: "bold",
-    color: "white"
+    fontSize: 35,
+    color: "white",
+    fontFamily: "curious"
   },
   buttonContainer: {
     alignSelf: 'center',
@@ -139,7 +139,9 @@ const styles = {
   },
   infoTextBody: {
     color: "white",
-    fontSize: 20
+    fontSize: 30,
+    fontFamily: "curious"
+
   },
   learnMoreContainer: {
     borderColor: "white",
@@ -147,13 +149,16 @@ const styles = {
   },
   learnMoreText: {
     color: "white",
-    fontWeight: "bold",
     textAlign: "center",
-    fontSize: 20
+    fontSize: 35,
+    fontFamily: "curious"
+
   },
   footerText: {
     color: "white",
-    textAlign: "center"
+    textAlign: "center",
+    fontSize: 30,
+    fontFamily: "curious"
   },
 }
 

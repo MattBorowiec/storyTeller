@@ -85,8 +85,9 @@ const styles = {
     },
     soundLength: {
         color: '#a63b3b',
-        fontSize: 30,
-        textAlign: "center"
+        fontSize: 50,
+        textAlign: "center",
+        fontFamily: "curious"
     },
     durationContainer: {
         flex: 1,
