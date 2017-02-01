@@ -88,7 +88,7 @@ class sideWindow extends Component {
                 style={styles.infoWindowButton}
                 onPress={this.windowSlide.bind(this)}
             >
-              <Image source={arrowURI} style={{height: 50, width: 35}}/>
+              <Image source={arrowURI} style={{ height: 50, width: 35}}/>
             </TouchableOpacity>
           </View>
         </Animated.View>
@@ -108,8 +108,11 @@ const styles = {
   infoTextContainer: {
     flex: 1,
     width: Dimensions.get('window').width / 3,
-    backgroundColor: '#949494',
-    padding: 20
+    backgroundColor: 'black',
+    padding: 20,
+    borderRightWidth: 2,
+    borderRightColor: "#4e8fb5",
+    zIndex: 2
   },
   infoTextHeader: {
     fontSize: 25,
@@ -119,11 +122,20 @@ const styles = {
   buttonContainer: {
     alignSelf: 'center',
     padding: 1,
-    backgroundColor: '#949494'
+    backgroundColor: 'black'
   },
   infoWindowButton: {
     height: 50,
-    width: 35
+    width: 35,
+    borderRightWidth: 1,
+    borderRightColor: "#4e8fb5",
+    borderTopWidth: 1,
+    borderTopColor: "#4e8fb5",
+    borderBottomWidth: 1,
+    borderBottomColor: "#4e8fb5",
+    borderLeftWidth: 1,
+    borderLeftColor: "black",
+    zIndex: 1
   },
   infoTextBody: {
     color: "white",

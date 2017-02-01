@@ -26,18 +26,13 @@ class StoryComponent extends Component {
                     onPress={this.onPress.bind(this)}
                 >
                     <View style={styles.storyContainer}>
-                        <View style={styles.blurbContainer}>
-                            <Text style={styles.soundBlurb}>
-                                Here is where some a published blurb about the story will go. Blurb blurb... Blurb
-                            </Text>
-                        </View>
                         <View style={styles.playBar}>
                             <View style={styles.buttonContainer}>
                                 <Image
                                     style={styles.button}
-                                    source={require('../../../img/white-play.png')}/>
+                                    source={require('../../../img/play-arrow-chalk-red.png')}/>
                             </View>
-                            <View>
+                            <View style={styles.durationContainer}>
                                 <Text style={styles.soundLength}>{this.props.duration}</Text>
                             </View>
                         </View>
@@ -53,17 +48,18 @@ class StoryComponent extends Component {
 const styles = {
     storyContainer: {
         borderWidth: 2,
-        borderColor: 'gray',
-        height: Dimensions.get('window').height / 2.5, margin: 10,
+        //borderColor: 'gray',
+        //height: Dimensions.get('window').height / 8,
+        margin: 10,
         width: Dimensions.get('window').width / 4
     },
     button: {
-        resizeMode: "center",
-        width: 55,
-        height: 55
+        //resizeMode: "center"
+        //width: 55,
+        //height: 55
     },
     buttonContainer: {
-        borderRightColor: "white",
+        borderRightColor: "#a63b3b",
         borderRightWidth: 1
     },
     blurbContainer: {
@@ -79,17 +75,23 @@ const styles = {
         textAlign: "center"
     },
     playBar: {
-        flex: 1,
+        flex: 3,
         flexDirection: 'row',
         borderWidth: 2,
-        borderColor: 'gray',
+        borderColor: '#a63b3b',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: "gray"
+        backgroundColor: "black"
     },
     soundLength: {
-        color: 'white',
-        fontSize: 18
+        color: '#a63b3b',
+        fontSize: 30,
+        textAlign: "center"
+    },
+    durationContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 };
 
