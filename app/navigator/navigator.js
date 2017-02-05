@@ -10,6 +10,8 @@ export default class NavigatorComponent extends Component {
     super(props)
   }
 
+
+
   render() {
     return <Router>
       <Scene key="root">

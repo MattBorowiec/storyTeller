@@ -5,6 +5,8 @@ import StoryList from '../components/story/StoryList';
 import SideWindow from '../components/common/SideWindow';
 import Dimensions from 'Dimensions';
 import testJson from '../test.json';
+import { Actions } from 'react-native-router-flux';
+
 
 
 class StoryContainer extends Component {
@@ -22,9 +24,17 @@ class StoryContainer extends Component {
                                                      event_stories={event.event_stories}/>);
     }
 
+
+    close() {
+        Actions.pop();
+    }
+
     render() {
         return (
             <View style={styles.listContainer}>
+                <TouchableOpacity style={styles.closeContainer} onPress={this.close.bind(this)}>
+                    <Text style={styles.closePlayer}>X</Text>
+                </TouchableOpacity>
                 <SideWindow />
                 <ScrollView
                     style={styles.scrollContainer}
@@ -41,6 +51,7 @@ const styles = {
     listContainer: {
         zIndex: 2,
         flex: 1,
+        paddingTop: 30,
         alignItems: 'center',
         justifyContent: 'center',
         width: Dimensions.get('window').width,
@@ -60,7 +71,26 @@ const styles = {
     },
     scrollContainer: {
         paddingLeft: 40
-    }
+    },
+    closePlayer: {
+        color: "gray",
+        fontSize: 50,
+        fontFamily: "curious",
+        marginBottom: 6
+    },
+    closeContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        position: "absolute",
+        width: 50,
+        height: 50,
+        borderWidth: 4,
+        borderRadius: 25,
+        borderColor: "gray",
+        top: 5,
+        right: 10
+    },
 };
 
 

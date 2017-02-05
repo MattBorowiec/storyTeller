@@ -11,16 +11,31 @@ class sideWindow extends Component {
     }
   }
 
+  componentWillMount() {
+    setTimeout( () => {
+        Animated.timing(
+            this.state.slideValue,
+            {
+                duration: 700,
+                easing: Easing.elastic(0),
+                toValue: 1
+            }
+        ).start();
+        this.setState({showing: true})
+    }, 1500);
+  }
+
   onPressLearnMore() {
     Alert.alert("WHAT DO???", "DA FUCK ARE WE DOIN WITH THIS BUTTON")
   }
 
   windowSlide() {
+    console.log('window slide!')
     if (!this.state.showing) {
       Animated.timing(
           this.state.slideValue,
           {
-            duration: 1000,
+            duration: 700,
             easing: Easing.elastic(0),
             toValue: 1
           }
@@ -31,7 +46,7 @@ class sideWindow extends Component {
       Animated.timing(
           this.state.slideValue,
           {
-            duration: 1000,
+            duration: 700,
             easing: Easing.elastic(0),
             toValue: 0
           }
@@ -88,7 +103,7 @@ class sideWindow extends Component {
                 style={styles.infoWindowButton}
                 onPress={this.windowSlide.bind(this)}
             >
-              <Image source={arrowURI} style={{ height: 50, width: 35}}/>
+              <Image source={arrowURI} style={{ margin: 6, alignSelf: 'center', height: 40, width: 40}}/>
             </TouchableOpacity>
           </View>
         </Animated.View>
@@ -125,15 +140,21 @@ const styles = {
     backgroundColor: 'black'
   },
   infoWindowButton: {
-    height: 50,
-    width: 35,
-    borderRightWidth: 1,
-    borderRightColor: "#4e8fb5",
-    borderTopWidth: 1,
-    borderTopColor: "#4e8fb5",
-    borderBottomWidth: 1,
-    borderBottomColor: "#4e8fb5",
-    borderLeftWidth: 1,
+    height: 65,
+    width: 65,
+    marginLeft: 10,
+    borderRadius: 32,
+    borderColor: '#4e8fb5',
+    borderWidth: 5,
+    ///// previous styles
+    // borderRightWidth: 1,
+    // borderRightColor: "#4e8fb5",
+    // borderTopWidth: 1,
+    // borderTopColor: "#4e8fb5",
+    // borderBottomWidth: 1,
+    // borderBottomColor: "#4e8fb5",
+    // borderLeftWidth: 1,
+
     borderLeftColor: "black",
     zIndex: 1
   },

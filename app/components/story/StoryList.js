@@ -14,6 +14,7 @@ class StoryList extends Component {
                                                                           event_location={this.props.event_location}/>)
     }
 
+
     render() {
         return (
             <View>

@@ -5,7 +5,7 @@ import Dimensions from 'Dimensions';
 import RNFetchBlob from 'react-native-fetch-blob'
 import Sound from 'react-native-sound';
 import { Actions } from 'react-native-router-flux';
-
+import resetTimer from '../components/timer/resetTimer';
 
 class StoryPlayer extends Component {
     constructor(props) {
@@ -37,6 +37,7 @@ class StoryPlayer extends Component {
                     } else {
                         console.log('success, audio length is ' + 'url is ' + this.props.url, this.sound.blob.getDuration());
                         this.setState({loading: false, length: this.sound.blob.getDuration()});
+                        setTimeout(this.play.bind(this), 1000)
                     }
                 });
             })
@@ -59,13 +60,17 @@ class StoryPlayer extends Component {
 
     play() {
         if (!this.state.playing) {
+            resetTimer.stop();
             this.sound.blob.play(() => {
                 this.setState({playing: false})
+                resetTimer.start(15000);
+                Actions.pop();
             });
             this.setState({playing: true})
         } else {
             this.sound.blob.pause();
             this.setState({playing: false});
+            resetTimer.start(15000);
         }
     };
 
@@ -83,12 +88,14 @@ class StoryPlayer extends Component {
 
 
         if (this.state.loading) {
-            return <ActivityIndicator
+            return <View style={styles.container}>
+                <ActivityIndicator
                 animating={true}
                 style={styles.button}
                 color="green"
                 size={100}
             />
+            </View>
         }
 
         return (
@@ -135,6 +142,7 @@ const styles = {
         width: 150,
         flex: 2,
         left: (Dimensions.get('window').width / 2) - 75,
+        backgroundColor: "black"
 
     },
     headerContainer: {
@@ -164,28 +172,31 @@ const styles = {
     },
     closePlayer: {
         color: "gray",
-        fontWeight: "bold",
-        fontSize: 35,
+        fontSize: 50,
+        fontFamily: "curious",
+        marginBottom: 6
     },
     closeContainer: {
+        flex: 1,
         justifyContent: "center",
         alignItems: "center",
         position: "absolute",
         width: 50,
         height: 50,
-        borderWidth: 1,
+        borderWidth: 4,
+        borderRadius: 25,
         borderColor: "gray",
-        top: 0,
-        right: 0
+        top: 20,
+        right: 20
     },
     audioTrackingContainer: {
         flex: 3,
         alignItems: "center"
-
     },
     playingImg: {
-        flex: 1,
-        resizeMode: "stretch"
+        // flex: 1,
+        // resizeMode: "stretch",
+        width: Dimensions.get("window").width + 100
     }
 
 };

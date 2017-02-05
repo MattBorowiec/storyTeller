@@ -13,7 +13,7 @@ class Landing extends Component {
     _onPressButton() {
         Actions.StoryDisplay();
     }
-    
+
     render() {
         return (
             <View>

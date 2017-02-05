@@ -9,6 +9,7 @@
     "apku": "adb shell pm uninstall com.storyteller"
   },
   "dependencies": {
+    "fbjs": "^0.8.9",
     "immutable": "^3.8.1",
     "react": "15.3.2",
     "react-native": "0.35.0",
