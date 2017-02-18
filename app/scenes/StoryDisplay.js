@@ -76,7 +76,8 @@ const styles = {
         color: "gray",
         fontSize: 50,
         fontFamily: "curious",
-        marginBottom: 6
+        marginBottom: 6,
+        zIndex: 1
     },
     closeContainer: {
         flex: 1,
@@ -88,8 +89,9 @@ const styles = {
         borderWidth: 4,
         borderRadius: 25,
         borderColor: "gray",
-        top: 5,
-        right: 10
+        top: 10,
+        right: 15,
+        zIndex: 2
     },
 };
 
