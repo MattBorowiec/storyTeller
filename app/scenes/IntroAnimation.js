@@ -3,15 +3,26 @@ import { connect } from 'react-redux';
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import Dimensions from 'Dimensions';
 import { Actions } from 'react-native-router-flux';
-
+import TextChange from '../components/text/textChange'
 
 class IntroAnimation extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            initialText: true
+        }
     }
 
     _onPressButton() {
         Actions.StoryDisplay();
+    }
+
+    componentDidMount() {
+        setTimeout(this._swapText.bind(this), 10000)
+    }
+
+    _swapText() {
+        this.setState({initialText: false})
     }
 
     render() {
@@ -21,12 +32,7 @@ class IntroAnimation extends Component {
                 <Image
                     style={styles.gif}
                     source={introAnimation}/>
-                <Text style={styles.text}>
-                    Here are voices from our communities,
-                </Text>
-                <Text style={styles.text}>
-                    recorded at various Ears around our city.
-                </Text>
+                <TextChange initialText={this.state.initialText}/>
                 <TouchableOpacity onPress={this._onPressButton.bind(this)}>
                     <View style={styles.continueContainer}>
                         <Text style={styles.continueText}>
@@ -46,11 +52,6 @@ const styles = StyleSheet.create({
         backgroundColor: "black",
         justifyContent: "center",
         alignItems: "center"
-    },
-    text: {
-        color: "white",
-        fontFamily: "curious",
-        fontSize: 40
     },
     continueContainer: {
         borderWidth: 3,
