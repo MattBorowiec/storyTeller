@@ -31,11 +31,11 @@ class IntroAnimation extends Component {
         let introAnimation = require('../../img/intro_animation_800x450.gif');
         return (
             <View style={styles.background}>
+                <TouchableOpacity style={styles.background} onPress={this._onPressButton.bind(this)}>
                 <Image
                     style={styles.gif}
                     source={introAnimation}/>
                 <TextChange initialText={this.state.initialText}/>
-                <TouchableOpacity onPress={this._onPressButton.bind(this)}>
                     <View style={styles.continueContainer}>
                         <Text style={styles.continueText}>
                             Tap to Continue
