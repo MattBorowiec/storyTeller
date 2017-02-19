@@ -20,7 +20,7 @@ class IntroAnimation extends Component {
 
     componentDidMount() {
         setTimeout(this._swapText.bind(this), 10000)
-        resetTimer.start(30000)
+        resetTimer.start(60000)
     }
 
     _swapText() {
