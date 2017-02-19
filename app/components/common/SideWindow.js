@@ -11,20 +11,6 @@ class sideWindow extends Component {
     }
   }
 
-  componentWillMount() {
-    setTimeout( () => {
-        Animated.timing(
-            this.state.slideValue,
-            {
-                duration: 700,
-                easing: Easing.elastic(0),
-                toValue: 1
-            }
-        ).start();
-        this.setState({showing: true})
-    }, 1500);
-  }
-
   onPressLearnMore() {
     Alert.alert("WHAT DO???", "DA FUCK ARE WE DOIN WITH THIS BUTTON")
   }

@@ -4,6 +4,7 @@ import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import Dimensions from 'Dimensions';
 import { Actions } from 'react-native-router-flux';
 import TextChange from '../components/text/textChange'
+import resetTimer from '../components/timer/resetTimer';
 
 class IntroAnimation extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class IntroAnimation extends Component {
 
     componentDidMount() {
         setTimeout(this._swapText.bind(this), 10000)
+        resetTimer.start(30000)
     }
 
     _swapText() {
