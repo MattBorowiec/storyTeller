@@ -33,7 +33,7 @@ export default class App extends Component {
 
   //on screen touch timer is set to go back to landing screen, timer reset on all screen touches, stopped when story is played.
   onTouchStart() {
-    resetTimer.start(30000);
+    resetTimer.start(60000);
   }
 
 
