@@ -15,7 +15,7 @@ class IntroText extends Component {
     }
 
     componentDidMount() {
-        setTimeout(this._transitionToAnimation, 100);
+        setTimeout(this._transitionToAnimation, 4000);
     }
 
     render() {

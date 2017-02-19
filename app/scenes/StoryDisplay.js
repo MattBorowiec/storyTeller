@@ -26,7 +26,7 @@ class StoryContainer extends Component {
 
 
     close() {
-        Actions.pop();
+        Actions.popTo('Landing');
     }
 
     render() {
