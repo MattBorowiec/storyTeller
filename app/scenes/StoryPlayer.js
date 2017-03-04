@@ -62,8 +62,9 @@ class StoryPlayer extends Component {
         if (!this.state.playing) {
             resetTimer.stop();
             this.sound.blob.play(() => {
-                this.setState({playing: false})
+                this.setState({playing: false});
                 resetTimer.start(15000);
+                RNFetchBlob.fs.unlink(this.sound.path);
                 Actions.pop();
             });
             this.setState({playing: true})
