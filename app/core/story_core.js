@@ -49,12 +49,16 @@ function sortStoriesByEvent(storiesArray) {
 }
 
 function formatDuration(time) {
-    if (time < 60) {
+    if (time < 10) {
+        return 0 + ":0" + time;
+    } else if (time < 60) {
         return 0 + ":" + time;
     } else {
         var minutes = Math.floor(time / 60);
         var seconds = time - minutes * 60;
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
         return minutes + ":" + seconds
     }
-
 }
