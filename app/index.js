@@ -6,7 +6,7 @@ import StoryReducer from './reducers/story_reducer';
 import  Navigator  from './navigator/navigator';
 import {fetchStories} from './core/story_core';
 
-const store = createStore(StoryReducer);
+export const store = createStore(StoryReducer);
 
 
 

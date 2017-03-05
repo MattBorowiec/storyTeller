@@ -5,6 +5,8 @@ import Dimensions from 'Dimensions';
 import RNFetchBlob from 'react-native-fetch-blob'
 import Sound from 'react-native-sound';
 import { Actions } from 'react-native-router-flux';
+import { store } from '../index'
+
 
 class StoryPlayer extends Component {
     constructor(props) {
@@ -53,6 +55,7 @@ class StoryPlayer extends Component {
     _pressBack() {
         RNFetchBlob.fs.unlink(this.sound.path);
         this.sound.blob.pause();
+        this.setNewTimeout();
     }
 
     play() {
@@ -60,6 +63,7 @@ class StoryPlayer extends Component {
             this.sound.blob.play(() => {
                 this.setState({playing: false});
                 RNFetchBlob.fs.unlink(this.sound.path);
+                this.setNewTimeout();
                 Actions.pop();
             });
             this.setState({playing: true})
@@ -69,9 +73,18 @@ class StoryPlayer extends Component {
         }
     };
 
+    setNewTimeout() {
+        var id = setTimeout(()=> {
+           Actions.popTo('Landing')
+        }, 120000);
+        store.dispatch({type: 'SET_TIMEOUT_ID', timeoutId: id});
+    }
+
+
     close() {
         this.sound.blob.pause();
         RNFetchBlob.fs.unlink(this.sound.path);
+        this.setNewTimeout();
         Actions.pop();
     }
 

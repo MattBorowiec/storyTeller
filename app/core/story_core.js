@@ -2,6 +2,10 @@ export function setStories(state, stories) {
     return state.set('stories', stories);
 }
 
+export function setTimeoutId(state, timeoutId) {
+    return state.set('timeoutId', timeoutId);
+}
+
 
 export function fetchStories() {
     return fetch('https://storybox-145021.appspot.com/api/audio/list', {

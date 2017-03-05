@@ -6,27 +6,29 @@ import SideWindow from '../components/common/SideWindow';
 import Dimensions from 'Dimensions';
 import testJson from '../test.json';
 import { Actions } from 'react-native-router-flux';
-
-
+import { store } from '../index'
 
 class StoryContainer extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            showing: false,
-            playing: false
-        }
     }
 
     renderStoryLists() {
         return this.props.stories.map((event, i) => <StoryList key={i} event_time={event.event_time}
-                                                     event_location={event.event_location}
-                                                     event_stories={event.event_stories}/>);
+                                                               event_location={event.event_location}
+                                                               event_stories={event.event_stories}
+        />);
     }
-
 
     close() {
         Actions.popTo('Landing');
+    }
+
+    componentDidMount() {
+        var id = setTimeout(()=> {
+            this.close()
+        }, 120000);
+        store.dispatch({type: 'SET_TIMEOUT_ID', timeoutId: id});
     }
 
     render() {
@@ -39,7 +41,6 @@ class StoryContainer extends Component {
                 <ScrollView
                     style={styles.scrollContainer}
                 >
-
                     {this.renderStoryLists()}
                 </ScrollView>
             </View>

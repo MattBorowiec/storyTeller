@@ -2,6 +2,9 @@ import { View, Image, Text, TouchableOpacity} from 'react-native';
 import React, { Component } from 'react';
 import Dimensions from 'Dimensions';
 import { Actions } from 'react-native-router-flux';
+import{ StoryReducer } from '../../reducers/story_reducer';
+import { store } from '../../index';
+
 
 
 class StoryComponent extends Component {
@@ -11,6 +14,9 @@ class StoryComponent extends Component {
     }
 
     onPress() {
+        var state = store.getState();
+        clearTimeout(state.get('timeoutId'));
+
         Actions.StoryPlayer({
             url: this.props.url,
             name: this.props.name,
