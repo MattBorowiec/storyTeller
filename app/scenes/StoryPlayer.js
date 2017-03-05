@@ -5,7 +5,6 @@ import Dimensions from 'Dimensions';
 import RNFetchBlob from 'react-native-fetch-blob'
 import Sound from 'react-native-sound';
 import { Actions } from 'react-native-router-flux';
-import resetTimer from '../components/timer/resetTimer';
 
 class StoryPlayer extends Component {
     constructor(props) {
@@ -21,6 +20,9 @@ class StoryPlayer extends Component {
     }
 
     componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', () => {
+            return this._pressBack()
+        });
         RNFetchBlob
             .config({
                 path: RNFetchBlob.fs.dirs.CacheDir + this.props.name
@@ -33,9 +35,7 @@ class StoryPlayer extends Component {
             .then(() => {
                 this.sound.blob = new Sound(this.sound.path, '', (error) => {
                     if (error) {
-                        console.log('failed to load the sound from path ', this.props.url, error);
                     } else {
-                        console.log('success, audio length is ' + 'url is ' + this.props.url, this.sound.blob.getDuration());
                         this.setState({loading: false, length: this.sound.blob.getDuration()});
                         setTimeout(this.play.bind(this), 1000)
                     }
@@ -44,9 +44,6 @@ class StoryPlayer extends Component {
             .catch((errorMessage) => {
                 console.log(errorMessage);
             });
-        BackAndroid.addEventListener('hardwareBackPress', () => {
-            return this._pressBack()
-        });
     }
 
     componentWillUnmount() {
@@ -60,10 +57,8 @@ class StoryPlayer extends Component {
 
     play() {
         if (!this.state.playing) {
-            resetTimer.stop();
             this.sound.blob.play(() => {
                 this.setState({playing: false});
-                resetTimer.start(15000);
                 RNFetchBlob.fs.unlink(this.sound.path);
                 Actions.pop();
             });
@@ -71,7 +66,6 @@ class StoryPlayer extends Component {
         } else {
             this.sound.blob.pause();
             this.setState({playing: false});
-            resetTimer.start(15000);
         }
     };
 
@@ -205,7 +199,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
     return {
-        stories: state.get('stories'),
+        stories: state.get('stories')
     }
 };
 

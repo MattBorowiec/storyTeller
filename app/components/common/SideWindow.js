@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image, Text, TouchableOpacity, ScrollView, Animated, Easing, Alert } from 'react-native';
 import Dimensions from 'Dimensions';
-import resetTimer from '../timer/resetTimer';
 
 class sideWindow extends Component {
     constructor(props) {
@@ -11,12 +10,7 @@ class sideWindow extends Component {
         }
     }
 
-    componentDidMount() {
-        resetTimer.start(60000)
-    }
-
     windowSlide() {
-        console.log('window slide!')
         if (!this.state.showing) {
             Animated.timing(
                 this.state.slideValue,
