@@ -5,10 +5,8 @@ import { createStore} from 'redux';
 import StoryReducer from './reducers/story_reducer';
 import  Navigator  from './navigator/navigator';
 import {fetchStories} from './core/story_core';
-import resetTimer from './components/timer/resetTimer';
 
-
-const store = createStore(StoryReducer);
+export const store = createStore(StoryReducer);
 
 
 
@@ -31,15 +29,9 @@ export default class App extends Component {
     }, 180000);
   }
 
-  //on screen touch timer is set to go back to landing screen, timer reset on all screen touches, stopped when story is played.
-  onTouchStart() {
-    resetTimer.start(15000);
-  }
-
-
   render() {
     return (
-        <View style={styles.touchResponder} onTouchStart={this.onTouchStart}>
+        <View style={styles.touchResponder} >
             <Provider store={store}>
                 <Navigator />
             </Provider>

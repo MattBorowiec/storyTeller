@@ -5,13 +5,18 @@ import  Hr from 'react-native-hr';
 
 
 class StoryList extends Component {
+    constructor(props) {
+        super(props)
+    }
+
 
     renderStoryComponents() {
         return this.props.event_stories.map((story, i) => <StoryComponent key={story.public_url} name={'story' + i}
                                                                           index={i} url={story.public_url}
                                                                           duration={story.duration}
                                                                           event_time={this.props.event_time}
-                                                                          event_location={this.props.event_location}/>)
+                                                                          event_location={this.props.event_location}
+        />)
     }
 
 

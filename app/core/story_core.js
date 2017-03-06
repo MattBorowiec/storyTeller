@@ -2,6 +2,10 @@ export function setStories(state, stories) {
     return state.set('stories', stories);
 }
 
+export function setTimeoutId(state, timeoutId) {
+    return state.set('timeoutId', timeoutId);
+}
+
 
 export function fetchStories() {
     return fetch('https://storybox-145021.appspot.com/api/audio/list', {
@@ -49,12 +53,16 @@ function sortStoriesByEvent(storiesArray) {
 }
 
 function formatDuration(time) {
-    if (time < 60) {
+    if (time < 10) {
+        return 0 + ":0" + time;
+    } else if (time < 60) {
         return 0 + ":" + time;
     } else {
         var minutes = Math.floor(time / 60);
         var seconds = time - minutes * 60;
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
         return minutes + ":" + seconds
     }
-
 }

@@ -5,7 +5,8 @@ import Dimensions from 'Dimensions';
 import RNFetchBlob from 'react-native-fetch-blob'
 import Sound from 'react-native-sound';
 import { Actions } from 'react-native-router-flux';
-import resetTimer from '../components/timer/resetTimer';
+import { store } from '../index'
+
 
 class StoryPlayer extends Component {
     constructor(props) {
@@ -21,6 +22,9 @@ class StoryPlayer extends Component {
     }
 
     componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', () => {
+            return this._pressBack()
+        });
         RNFetchBlob
             .config({
                 path: RNFetchBlob.fs.dirs.CacheDir + this.props.name
@@ -33,9 +37,7 @@ class StoryPlayer extends Component {
             .then(() => {
                 this.sound.blob = new Sound(this.sound.path, '', (error) => {
                     if (error) {
-                        console.log('failed to load the sound from path ', this.props.url, error);
                     } else {
-                        console.log('success, audio length is ' + 'url is ' + this.props.url, this.sound.blob.getDuration());
                         this.setState({loading: false, length: this.sound.blob.getDuration()});
                         setTimeout(this.play.bind(this), 1000)
                     }
@@ -44,9 +46,6 @@ class StoryPlayer extends Component {
             .catch((errorMessage) => {
                 console.log(errorMessage);
             });
-        BackAndroid.addEventListener('hardwareBackPress', () => {
-            return this._pressBack()
-        });
     }
 
     componentWillUnmount() {
@@ -56,27 +55,36 @@ class StoryPlayer extends Component {
     _pressBack() {
         RNFetchBlob.fs.unlink(this.sound.path);
         this.sound.blob.pause();
+        this.setNewTimeout();
     }
 
     play() {
         if (!this.state.playing) {
-            resetTimer.stop();
             this.sound.blob.play(() => {
-                this.setState({playing: false})
-                resetTimer.start(15000);
+                this.setState({playing: false});
+                RNFetchBlob.fs.unlink(this.sound.path);
+                this.setNewTimeout();
                 Actions.pop();
             });
             this.setState({playing: true})
         } else {
             this.sound.blob.pause();
             this.setState({playing: false});
-            resetTimer.start(15000);
         }
     };
+
+    setNewTimeout() {
+        var id = setTimeout(()=> {
+           Actions.popTo('Landing')
+        }, 120000);
+        store.dispatch({type: 'SET_TIMEOUT_ID', timeoutId: id});
+    }
+
 
     close() {
         this.sound.blob.pause();
         RNFetchBlob.fs.unlink(this.sound.path);
+        this.setNewTimeout();
         Actions.pop();
     }
 
@@ -204,7 +212,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
     return {
-        stories: state.get('stories'),
+        stories: state.get('stories')
     }
 };
 
