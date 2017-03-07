@@ -1,4 +1,4 @@
-package com.storyteller;
+package com.curiousearstoryteller;
 
 import android.app.Application;
 import android.util.Log;

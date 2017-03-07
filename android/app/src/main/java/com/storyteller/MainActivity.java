@@ -1,4 +1,4 @@
-package com.storyteller;
+package com.curiousearstoryteller;
 
 import com.facebook.react.ReactActivity;
 
