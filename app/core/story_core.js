@@ -52,7 +52,7 @@ function sortStoriesByEvent(storiesArray) {
     return outArr;
 }
 
-function formatDuration(time) {
+export function formatDuration(time) {
     if (time < 10) {
         return 0 + ":0" + time;
     } else if (time < 60) {

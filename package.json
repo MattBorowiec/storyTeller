@@ -6,7 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "apki": "cd android && ./gradlew assembleRelease && cd .. && react-native run-android --variant=release",
-    "apku": "adb shell pm uninstall com.storyteller"
+    "apku": "adb shell pm uninstall com.curiousearstoryteller"
   },
   "dependencies": {
     "fbjs": "^0.8.9",

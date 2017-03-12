@@ -13,6 +13,8 @@ class StoryComponent extends Component {
         this.path = null;
     }
 
+
+
     onPress() {
         var state = store.getState();
         clearTimeout(state.get('timeoutId'));
@@ -21,7 +23,8 @@ class StoryComponent extends Component {
             url: this.props.url,
             name: this.props.name,
             event_time: this.props.event_time,
-            event_location: this.props.event_location
+            event_location: this.props.event_location,
+            duration: this.props.duration
         });
     }
 

@@ -15,10 +15,15 @@ class StoryPlayer extends Component {
             blob: null,
             path: ""
         };
+        var time = props.duration.split(':');
         this.state = {
+            started: false,
             loading: true,
-            playing: false
+            playing: false,
+            minutes_remaingin: parseInt(time[0]),
+            seconds_remaining: parseInt(time[1])
         };
+        this.countDownId = null;
     }
 
     componentDidMount() {
@@ -52,14 +57,35 @@ class StoryPlayer extends Component {
         BackAndroid.removeEventListener('hardwareBackPress');
     }
 
+
     _pressBack() {
         RNFetchBlob.fs.unlink(this.sound.path);
         this.sound.blob.pause();
         this.setNewTimeout();
     }
 
+    countDown(action) {
+        if (action === 'start') {
+            this.countDownId = setInterval(() => {
+                if (this.state.seconds_remaining > 0) {
+                    this.setState({seconds_remaining: this.state.seconds_remaining - 1});
+                    if (this.state.seconds_remaining < 0 ) {
+                        this.setState({
+                            minutes_remaining: this.state.minutes_remaingin -1,
+                            seconds_remaining: 60
+                        });
+                    }
+                }
+            }, 1000);
+        } else {
+            clearTimeout(this.countDownId)
+        }
+    }
+
     play() {
+        this.setState({started: true});
         if (!this.state.playing) {
+            this.countDown('start');
             this.sound.blob.play(() => {
                 this.setState({playing: false});
                 RNFetchBlob.fs.unlink(this.sound.path);
@@ -70,6 +96,7 @@ class StoryPlayer extends Component {
         } else {
             this.sound.blob.pause();
             this.setState({playing: false});
+            this.countDown('stop');
         }
     };
 
@@ -115,6 +142,12 @@ class StoryPlayer extends Component {
                     <Text style={styles.whenLabel}>WHEN:{'\  '}
                         <Text style={styles.location}>{ this.props.event_time}</Text>
                     </Text>
+                    {this.state.started ?
+                        <Text style={styles.whenLabel}>TIME REMAINING:{'\  '}
+                        <Text style={styles.location}>{this.state.minutes_remaingin.toString()}:{this.state.seconds_remaining.toString()}</Text>
+                    </Text> :
+                    null
+                    }
                     <TouchableOpacity style={styles.closeContainer} onPress={this.close.bind(this)}>
                         <Text style={styles.closePlayer}>X</Text>
                     </TouchableOpacity>
