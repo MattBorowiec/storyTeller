@@ -17,11 +17,11 @@ export default class NavigatorComponent extends Component {
   render() {
     return <Router>
       <Scene key="root">
-        <Scene hideNavBar={true}  key="Landing" component={Landing} initial={true}/>
-        <Scene hideNavBar={true} key="IntroText" component={IntroText} />
-        <Scene hideNavBar={true} key="IntroAnimation" component={IntroAnimation} />
-        <Scene hideNavBar={true} key="StoryDisplay" component={StoryDisplay} />
-        <Scene hideNavBar={true} key="StoryPlayer" component={StoryPlayer} />
+        <Scene hideNavBar={true} animation="fade" key="Landing" component={Landing} initial={true}/>
+        <Scene hideNavBar={true} animation="fade" key="IntroText" component={IntroText} />
+        <Scene hideNavBar={true} animation="fade" key="IntroAnimation" component={IntroAnimation} />
+        <Scene hideNavBar={true} animation="fade" key="StoryDisplay" component={StoryDisplay} />
+        <Scene hideNavBar={true} animation="fade" key="StoryPlayer" component={StoryPlayer} />
       </Scene>
     </Router>
   }
