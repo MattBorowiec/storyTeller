@@ -15,14 +15,26 @@ export default class NavigatorComponent extends Component {
 
 
   render() {
-    return <Router>
+    return <Router getSceneStyle={getSceneStyle}>
       <Scene key="root">
-        <Scene hideNavBar={true} animation="fade" key="Landing" component={Landing} initial={true}/>
-        <Scene hideNavBar={true} animation="fade" key="IntroText" component={IntroText} />
-        <Scene hideNavBar={true} animation="fade" key="IntroAnimation" component={IntroAnimation} />
-        <Scene hideNavBar={true} animation="fade" key="StoryDisplay" component={StoryDisplay} />
-        <Scene hideNavBar={true} animation="fade" key="StoryPlayer" component={StoryPlayer} />
+        <Scene duration={1000} hideNavBar={true} animation={'fade'} key="Landing" component={Landing} initial={true}/>
+        <Scene duration={1000} hideNavBar={true} animation={'fade'} key="IntroText" component={IntroText} />
+        <Scene duration={1000} hideNavBar={true} animation={'fade'} key="IntroAnimation" component={IntroAnimation} />
+        <Scene duration={1000} hideNavBar={true} animation={'fade'} key="StoryDisplay" component={StoryDisplay} />
+        <Scene duration={1000} hideNavBar={true} animation={'fade'} key="StoryPlayer" component={StoryPlayer} />
       </Scene>
     </Router>
   }
 }
+
+const getSceneStyle = ( props, computedProps) => {
+    const style = {
+        flex: 1,
+        backgroundColor: '#000000',
+        shadowColor: null,
+        shadowOffset: null,
+        shadowOpacity: null,
+        shadowRadius: null,
+    };
+    return style;
+};
