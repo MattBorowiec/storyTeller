@@ -57,6 +57,7 @@ class StoryPlayer extends Component {
 
     componentWillUnmount() {
         BackAndroid.removeEventListener('hardwareBackPress');
+        clearTimeout(this.countDownId);
     }
 
 
