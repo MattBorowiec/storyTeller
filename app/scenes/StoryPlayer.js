@@ -32,7 +32,8 @@ class StoryPlayer extends Component {
         });
         RNFetchBlob
             .config({
-                path: RNFetchBlob.fs.dirs.CacheDir + this.props.name
+                path: RNFetchBlob.fs.dirs.CacheDir + "/" + this.props.name,
+                session: 'storyTeller'
             })
             .fetch('GET', this.props.url)
             .then((res) => {
@@ -42,6 +43,7 @@ class StoryPlayer extends Component {
             .then(() => {
                 this.sound.blob = new Sound(this.sound.path, '', (error) => {
                     if (error) {
+                        console.log("StoryTeller::RNFetchBlob::CreateBlobErr:: " + error);
                     } else {
                         this.setState({loading: false, length: this.sound.blob.getDuration()});
                         setTimeout(this.play.bind(this), 1000)
@@ -49,7 +51,7 @@ class StoryPlayer extends Component {
                 });
             })
             .catch((errorMessage) => {
-                console.log(errorMessage);
+                console.log("StoryTeller::RNFetchBlob::Error:: " + errorMessage);
             });
     }
 
@@ -59,8 +61,9 @@ class StoryPlayer extends Component {
 
 
     _pressBack() {
-        RNFetchBlob.fs.unlink(this.sound.path);
         this.sound.blob.pause();
+        this.sound.blob.release();
+        RNFetchBlob.session('storyTeller').dispose();
         this.setNewTimeout();
     }
 
@@ -88,7 +91,8 @@ class StoryPlayer extends Component {
             this.countDown('start');
             this.sound.blob.play(() => {
                 this.setState({playing: false});
-                RNFetchBlob.fs.unlink(this.sound.path);
+                this.sound.blob.release();
+                RNFetchBlob.session('storyTeller').dispose();
                 this.setNewTimeout();
                 Actions.pop();
             });
@@ -110,7 +114,8 @@ class StoryPlayer extends Component {
 
     close() {
         this.sound.blob.pause();
-        RNFetchBlob.fs.unlink(this.sound.path);
+        this.sound.blob.release();
+        RNFetchBlob.session('storyTeller').dispose();
         this.setNewTimeout();
         Actions.pop();
     }
@@ -120,7 +125,6 @@ class StoryPlayer extends Component {
         const pause = require('../../img/pause-lines-chalk-purple.png');
         let playUri = !this.state.playing ? play : pause;
         let playImg = this.state.playing ? require('../../img/wave.gif') : require('../../img/sound-wave.png');
-
 
         if (this.state.loading) {
             return <View style={styles.container}>
