@@ -34,9 +34,6 @@ class StoryContainer extends Component {
     render() {
         return (
             <View style={styles.listContainer}>
-                <TouchableOpacity style={styles.closeContainer} onPress={this.close.bind(this)}>
-                    <Text style={styles.closePlayer}>X</Text>
-                </TouchableOpacity>
                 <SideWindow />
                 <ScrollView
                     style={styles.scrollContainer}
