@@ -153,9 +153,13 @@ class StoryPlayer extends Component {
                     </Text> :
                     null
                     }
-                    <TouchableOpacity style={styles.closeContainer} onPress={this.close.bind(this)}>
-                        <Text style={styles.closePlayer}>X</Text>
-                    </TouchableOpacity>
+                    {this.state.started ?
+                        /* Only show X if audio is loaded, otherwise if user hits X before screen pops but the audio still plays */
+                        <TouchableOpacity style={styles.closeContainer} onPress={this.close.bind(this)}>
+                            <Text style={styles.closePlayer}>X</Text>
+                        </TouchableOpacity> :
+                        null
+                    }
                 </View>
 
                 <View style={styles.buttonContainer}>
