@@ -7,11 +7,12 @@ export function setTimeoutId(state, timeoutId) {
 }
 
 
-export function fetchStories() {
-    return fetch('https://storybox-145021.appspot.com/api/audio/list', {
+export function fetchStories(pageNum) {
+    var url = 'https://storybox-145021.appspot.com/api/audio/list?page=' + pageNum || 0;
+    return fetch(url, {
         method: 'get',
     }).then((res) => {
-        return res.json()
+        return res.json();
     }).then((resJson) => {
         return sortStoriesByEvent(resJson);
     })
