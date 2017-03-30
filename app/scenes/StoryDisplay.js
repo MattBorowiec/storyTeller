@@ -37,8 +37,8 @@ class StoryContainer extends Component {
     }
 
     previousPage() {
+        this.setState({is_loading: true});
         if (this.state.page_number > 0) {
-            this.setState({is_loading: true});
             fetchStories(this.state.page_number - 1).done((stories) => {
                 store.dispatch({type: 'SET_STORIES', state: stories});
                 this.setState({page_number: this.state.page_number - 1, is_loading: false});
