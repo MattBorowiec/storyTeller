@@ -49,10 +49,9 @@ class StoryContainer extends Component {
     nextPage() {
         this.setState({is_loading: true});
         fetchStories(this.state.page_number + 1).done((stories) => {
-            //TODO Re-enable after finsihed testing.
-            //if (stories.length === 0) {
-            //    return
-            //}
+            if (stories.length === 0) {
+                return
+            }
             store.dispatch({type: 'SET_STORIES', state: stories});
             this.setState({page_number: this.state.page_number + 1, is_loading: false});
         });
