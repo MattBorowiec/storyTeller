@@ -20,13 +20,6 @@ export default class App extends Component {
     fetchStories().done((stories) => {
       store.dispatch({type: 'SET_STORIES', state: stories});
     });
-
-    //interval for fetching stories every 3 minutes
-    setInterval(() => {
-        fetchStories().done((stories) => {
-            store.dispatch({type: 'SET_STORIES', state: stories});
-        });
-    }, 180000);
   }
 
   render() {

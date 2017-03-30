@@ -37,11 +37,16 @@ class StoryContainer extends Component {
     }
 
     previousPage() {
-        this.setState({is_loading: true});
         if (this.state.page_number > 0) {
+            this.setState({is_loading: true});
             fetchStories(this.state.page_number - 1).done((stories) => {
                 store.dispatch({type: 'SET_STORIES', state: stories});
                 this.setState({page_number: this.state.page_number - 1, is_loading: false});
+            });
+        } else {
+            fetchStories().done((stories) => {
+                store.dispatch({type: 'SET_STORIES', state: stories});
+                this.setState({page_number: 0, is_loading: false});
             });
         }
     }
@@ -50,7 +55,7 @@ class StoryContainer extends Component {
         this.setState({is_loading: true});
         fetchStories(this.state.page_number + 1).done((stories) => {
             if (stories.length === 0) {
-                return
+                return this.setState({is_loading: false});
             }
             store.dispatch({type: 'SET_STORIES', state: stories});
             this.setState({page_number: this.state.page_number + 1, is_loading: false});
