@@ -81,10 +81,14 @@ class StoryContainer extends Component {
                     {this.renderStoryLists()}
                 </ScrollView>
         }
+
+        // TODO If thre is no empty text field below {scrollView}, the pagination controls won't render. Bug?
+        // TODO Figure out why element directly below scrollView is disappearing
         return (
             <View style={styles.listContainer}>
                 <SideWindow />
                 {scrollView}
+                <Text>WHY THIS DISAPPEAR?!?!</Text>
                 <View style={styles.paginationContainer}>
                     <TouchableHighlight onPress={this.previousPage.bind(this)}>
                         <Image style={styles.pageArrowImg} source={require('../../img/cheveron-left.png')}/>
