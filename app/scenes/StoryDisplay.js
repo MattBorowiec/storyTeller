@@ -34,9 +34,6 @@ class StoryContainer extends Component {
     render() {
         return (
             <View style={styles.listContainer}>
-                <TouchableOpacity style={styles.closeContainer} onPress={this.close.bind(this)}>
-                    <Text style={styles.closePlayer}>X</Text>
-                </TouchableOpacity>
                 <SideWindow />
                 <ScrollView
                     style={styles.scrollContainer}
@@ -72,28 +69,7 @@ const styles = {
     },
     scrollContainer: {
         paddingLeft: 40
-    },
-    closePlayer: {
-        color: "gray",
-        fontSize: 50,
-        fontFamily: "curious",
-        marginBottom: 6,
-        zIndex: 1
-    },
-    closeContainer: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        position: "absolute",
-        width: 50,
-        height: 50,
-        borderWidth: 4,
-        borderRadius: 25,
-        borderColor: "gray",
-        top: 10,
-        right: 15,
-        zIndex: 2
-    },
+    }
 };
 
 
