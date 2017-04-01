@@ -6,6 +6,7 @@ import RNFetchBlob from 'react-native-fetch-blob'
 import Sound from 'react-native-sound';
 import { Actions } from 'react-native-router-flux';
 import { store } from '../index'
+import { formatDuration } from '../core/story_core'
 
 
 class StoryPlayer extends Component {
@@ -15,13 +16,11 @@ class StoryPlayer extends Component {
             blob: null,
             path: ""
         };
-        var time = props.duration.split(':');
         this.state = {
             started: false,
             loading: true,
             playing: false,
-            minutes_remaingin: parseInt(time[0]),
-            seconds_remaining: parseInt(time[1])
+            seconds_remaining: -1
         };
         this.countDownId = null;
     }
@@ -45,7 +44,7 @@ class StoryPlayer extends Component {
                     if (error) {
                         console.log("StoryTeller::RNFetchBlob::CreateBlobErr:: " + error);
                     } else {
-                        this.setState({loading: false, length: this.sound.blob.getDuration()});
+                        this.setState({loading: false, seconds_remaining: this.sound.blob.getDuration().toFixed(0)});
                         setTimeout(this.play.bind(this), 1000)
                     }
                 });
@@ -72,13 +71,7 @@ class StoryPlayer extends Component {
         if (action === 'start') {
             this.countDownId = setInterval(() => {
                 if (this.state.seconds_remaining > 0) {
-                    this.setState({seconds_remaining: this.state.seconds_remaining - 1});
-                    if (this.state.seconds_remaining < 0 ) {
-                        this.setState({
-                            minutes_remaining: this.state.minutes_remaingin -1,
-                            seconds_remaining: 60
-                        });
-                    }
+                    this.setState({seconds_remaining: this.state.seconds_remaining - 1})
                 }
             }, 1000);
         } else {
@@ -149,13 +142,17 @@ class StoryPlayer extends Component {
                     </Text>
                     {this.state.started ?
                         <Text style={styles.whenLabel}>TIME REMAINING:{'\  '}
-                        <Text style={styles.location}>{this.state.minutes_remaingin.toString()}:{this.state.seconds_remaining.toString()}</Text>
+                        <Text style={styles.location}>{formatDuration(this.state.seconds_remaining)}</Text>
                     </Text> :
                     null
                     }
-                    <TouchableOpacity style={styles.closeContainer} onPress={this.close.bind(this)}>
-                        <Text style={styles.closePlayer}>X</Text>
-                    </TouchableOpacity>
+                    {this.state.started ?
+                        /* Only show X if audio is loaded, otherwise if user hits X before screen pops but the audio still plays */
+                        <TouchableOpacity style={styles.closeContainer} onPress={this.close.bind(this)}>
+                            <Text style={styles.closePlayer}>X</Text>
+                        </TouchableOpacity> :
+                        null
+                    }
                 </View>
 
                 <View style={styles.buttonContainer}>

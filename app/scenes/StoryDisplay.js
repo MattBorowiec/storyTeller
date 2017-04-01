@@ -83,9 +83,6 @@ class StoryContainer extends Component {
         }
         return (
             <View style={styles.listContainer}>
-                <TouchableOpacity style={styles.closeContainer} onPress={this.close.bind(this)}>
-                    <Text style={styles.closePlayer}>X</Text>
-                </TouchableOpacity>
                 <SideWindow />
                 {scrollView}
                 <View style={styles.paginationContainer}>
@@ -128,26 +125,6 @@ const styles = {
     scrollContainer: {
         flex: 7,
         paddingLeft: 40
-    },
-    closePlayer: {
-        color: "gray",
-        fontSize: 50,
-        fontFamily: "curious",
-        marginBottom: 6,
-        zIndex: 1
-    },
-    closeContainer: {
-        justifyContent: "center",
-        alignItems: "center",
-        position: "absolute",
-        width: 50,
-        height: 50,
-        borderWidth: 4,
-        borderRadius: 25,
-        borderColor: "gray",
-        top: 10,
-        right: 15,
-        zIndex: 2
     },
     paginationContainer: {
         flex: 1,
