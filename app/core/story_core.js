@@ -43,7 +43,7 @@ function sortStoriesByEvent(storiesArray) {
                 event.event_stories.push({
                     "public_url": story.public_url,
                     "timestamp": story.timestamp,
-                    "duration": formatDuration(story.length_in_seconds)
+                    "duration": story.length_in_seconds
                 });
             }
         });
