@@ -80,7 +80,6 @@ class StoryContainer extends Component {
                     style={styles.scrollContainer}
                     contentContainerStlye={{flexDirection: "column", alignItems: "center"}}
                 >
-
                     {this.renderStoryLists()}
                 </ScrollView>
         }
@@ -138,7 +137,8 @@ const styles = {
         justifyContent: "center",
         alignItems: "center",
         borderTopWidth: 4,
-        flexDirection: "row"
+        flexDirection: "row",
+        marginBottom: 50
     },
     paginationText : {
         fontFamily: "curious",
