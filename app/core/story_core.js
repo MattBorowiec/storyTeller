@@ -6,9 +6,24 @@ export function setTimeoutId(state, timeoutId) {
     return state.set('timeoutId', timeoutId);
 }
 
+export function setFeaturedStories(state, featuredStories) {
+    return state.set('featuredStories', featuredStories)
+}
+
 
 export function fetchStories(pageNum) {
-    var url = 'https://storybox-145021.appspot.com/api/audio/list?page=' + pageNum || 0;
+    var url = 'http://192.168.1.118:8080/api/audio/list?page=' + pageNum || 0;
+    return fetch(url, {
+        method: 'get',
+    }).then((res) => {
+        return res.json();
+    }).then((resJson) => {
+        return sortStoriesByEvent(resJson);
+    })
+}
+
+export function fetchFeaturedStories() {
+    var url = 'http://192.168.1.118:8080/api/audio/featured';
     return fetch(url, {
         method: 'get',
     }).then((res) => {
