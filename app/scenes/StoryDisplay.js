@@ -25,6 +25,12 @@ class StoryContainer extends Component {
         />);
     }
 
+    renderFeaturedStoryList() {
+        return this.props.featuredStories.map((event, i) => <StoryList key={"featured-list-1"}
+                                                                       event_location={"Featured Stories"}
+                                                                       event_stories={event.event_stories}/>)
+    }
+
     close() {
         Actions.popTo('Landing');
     }
@@ -75,15 +81,17 @@ class StoryContainer extends Component {
                     />
                 </View>
         } else {
+            var featList = (this.state.page_number === 0) ? this.renderFeaturedStoryList() : <Text></Text>;
             scrollView =
                 <ScrollView
                     style={styles.scrollContainer}
                     contentContainerStlye={{flexDirection: "column", alignItems: "center"}}
                 >
-
+                    {featList}
                     {this.renderStoryLists()}
                 </ScrollView>
         }
+
 
         // TODO If thre is no empty text field below {scrollView}, the pagination controls won't render. Bug?
         // TODO Figure out why element directly below scrollView is disappearing
@@ -140,7 +148,7 @@ const styles = {
         borderTopWidth: 4,
         flexDirection: "row"
     },
-    paginationText : {
+    paginationText: {
         fontFamily: "curious",
         fontSize: 60,
         padding: 20
@@ -152,7 +160,7 @@ const styles = {
         paddingRight: 20
     },
     pageArrowImg: {
-        height : 60,
+        height: 60,
         width: 60,
         borderWidth: 1
     },
@@ -168,6 +176,7 @@ const styles = {
 const mapStateToProps = (state) => {
     return {
         stories: state.get('stories'),
+        featuredStories: state.get('featuredStories')
     }
 };
 

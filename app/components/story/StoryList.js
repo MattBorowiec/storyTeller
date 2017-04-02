@@ -41,7 +41,8 @@ class StoryList extends Component {
 
 const styles = {
     container: {
-      width: Dimensions.get("window").width - 30
+        width: Dimensions.get("window").width - 30,
+        marginBottom: 25
     },
     scrollContainer: {
         paddingLeft: 40,
