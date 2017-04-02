@@ -27,6 +27,7 @@ class StoryContainer extends Component {
 
     renderFeaturedStoryList() {
         return this.props.featuredStories.map((event, i) => <StoryList key={"featured-list-1"}
+                                                                       event_time={event.event_time}
                                                                        event_location={"Featured Stories"}
                                                                        event_stories={event.event_stories}/>)
     }
