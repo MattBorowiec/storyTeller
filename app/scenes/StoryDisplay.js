@@ -100,7 +100,7 @@ class StoryContainer extends Component {
             <View style={styles.listContainer}>
                 <SideWindow />
                 {scrollView}
-                <Text>WHY THIS DISAPPEAR?!?!</Text>
+                <Text></Text>
                 <View style={styles.paginationContainer}>
                     <TouchableHighlight onPress={this.previousPage.bind(this)} disabled={this.state.is_loading}>
                         <Image style={styles.pageArrowImg} source={require('../../img/cheveron-left.png')}/>
@@ -147,7 +147,8 @@ const styles = {
         justifyContent: "center",
         alignItems: "center",
         borderTopWidth: 4,
-        flexDirection: "row"
+        flexDirection: "row",
+        marginBottom: 50
     },
     paginationText: {
         fontFamily: "curious",
