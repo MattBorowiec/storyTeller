@@ -24,8 +24,6 @@ export default class App extends Component {
     fetchFeaturedStories().done((featuredStories) => {
       store.dispatch({type: 'SET_FEATURED_STORIES', featuredStories: featuredStories});
     });
-
-
   }
 
   render() {
