@@ -14,7 +14,8 @@ class StoryContainer extends Component {
         super(props);
         this.state = {
             page_number: 0,
-            is_loading: false
+            is_loading: false,
+            page_btn_disabled: false
         }
     }
 
@@ -37,28 +38,28 @@ class StoryContainer extends Component {
     }
 
     previousPage() {
-        this.setState({is_loading: true});
+        this.setState({is_loading: true, page_btn_disabled: true});
         if (this.state.page_number > 0) {
             fetchStories(this.state.page_number - 1).done((stories) => {
                 store.dispatch({type: 'SET_STORIES', state: stories});
-                this.setState({page_number: this.state.page_number - 1, is_loading: false});
+                this.setState({page_number: this.state.page_number - 1, is_loading: false, page_btn_disabled: false});
             });
         } else {
             fetchStories().done((stories) => {
                 store.dispatch({type: 'SET_STORIES', state: stories});
-                this.setState({page_number: 0, is_loading: false});
+                this.setState({page_number: 0, is_loading: false, page_btn_disabled: false});
             });
         }
     }
 
     nextPage() {
-        this.setState({is_loading: true});
+        this.setState({is_loading: true, page_btn_disabled: true});
         fetchStories(this.state.page_number + 1).done((stories) => {
             if (stories.length === 0) {
-                return this.setState({is_loading: false});
+                return this.setState({is_loading: false, page_btn_disabled: false});
             }
             store.dispatch({type: 'SET_STORIES', state: stories});
-            this.setState({page_number: this.state.page_number + 1, is_loading: false});
+            this.setState({page_number: this.state.page_number + 1, is_loading: false, page_btn_disabled: false});
         });
     }
 
@@ -93,12 +94,12 @@ class StoryContainer extends Component {
                 {scrollView}
                 <Text>WHY THIS DISAPPEAR?!?!</Text>
                 <View style={styles.paginationContainer}>
-                    <TouchableHighlight onPress={this.previousPage.bind(this)}>
+                    <TouchableHighlight onPress={this.previousPage.bind(this)} disabled={this.state.page_btn_disabled}>
                         <Image style={styles.pageArrowImg} source={require('../../img/cheveron-left.png')}/>
                     </TouchableHighlight>
                     <Text style={styles.paginationText}>Page</Text>
                     <Text style={styles.paginationPageNumber}>{this.state.page_number}</Text>
-                    <TouchableHighlight onPress={this.nextPage.bind(this)}>
+                    <TouchableHighlight onPress={this.nextPage.bind(this)} disabled={this.state.page_btn_disabled}>
                         <Image style={styles.pageArrowImg} source={require('../../img/cheveron-right.png')}/>
                     </TouchableHighlight>
                 </View>
