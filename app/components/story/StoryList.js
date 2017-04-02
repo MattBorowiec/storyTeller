@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Image, Text, TouchableOpacity, ScrollView, Animated, Easing, Alert } from 'react-native';
 import StoryComponent from './StoryComponent.js';
 import  Hr from 'react-native-hr';
+import Dimensions from 'Dimensions';
 
 
 class StoryList extends Component {
@@ -22,29 +23,35 @@ class StoryList extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <Text style={styles.headerText}>
                     <Text style={styles.eventLocation}>{this.props.event_location}</Text>
                     <Text style={styles.eventTime}> {this.props.event_time}</Text>
                 </Text>
                 <Hr lineColor="#7a7c7f"/>
-                <ScrollView
+                <View
                     style={styles.scrollContainer}
-                    horizontal={true}
                 >
                     {this.renderStoryComponents()}
-                </ScrollView>
+                </View>
             </View>
         )
     }
 }
 
 const styles = {
+    container: {
+      width: Dimensions.get("window").width - 30
+    },
     scrollContainer: {
-        paddingLeft: 40
+        paddingLeft: 40,
+        paddingRight: 40,
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "space-between"
     },
     headerText: {
-        fontFamily: "curious",
+        fontFamily: "curious"
     },
     eventLocation: {
         color: "white",
@@ -54,7 +61,7 @@ const styles = {
     eventTime: {
         color: "white",
         fontSize: 40
-    },
+    }
 };
 
 export default StoryList;

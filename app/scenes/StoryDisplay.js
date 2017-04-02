@@ -77,7 +77,10 @@ class StoryContainer extends Component {
         } else {
             scrollView =
                 <ScrollView
-                    style={styles.scrollContainer}>
+                    style={styles.scrollContainer}
+                    contentContainerStlye={{flexDirection: "column", alignItems: "center"}}
+                >
+
                     {this.renderStoryLists()}
                 </ScrollView>
         }

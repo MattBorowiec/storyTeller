@@ -30,7 +30,7 @@ class StoryComponent extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <TouchableOpacity
                     onPress={this.onPress.bind(this)}
                 >
@@ -55,6 +55,9 @@ class StoryComponent extends Component {
 
 
 const styles = {
+    container: {
+      height: 100
+    },
     storyContainer: {
         borderWidth: 2,
         //borderColor: 'gray',
