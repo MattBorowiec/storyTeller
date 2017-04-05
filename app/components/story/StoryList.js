@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { View, Image, Text, TouchableOpacity, ScrollView, Animated, Easing, Alert } from 'react-native';
 import StoryComponent from './StoryComponent.js';
 import  Hr from 'react-native-hr';
+import { Colors, ThemeBorderColors, ThemeTintColors } from '../../stylesheets/theme';
+import { randomProperty } from '../../core/story_core'
+
 
 
 class StoryList extends Component {
@@ -16,6 +19,9 @@ class StoryList extends Component {
                                                                           duration={story.duration}
                                                                           event_time={this.props.event_time}
                                                                           event_location={this.props.event_location}
+                                                                          color={randomProperty(Colors)}
+                                                                          borderColor={randomProperty(ThemeBorderColors)}
+                                                                          tintColor={randomProperty(ThemeTintColors)}
         />)
     }
 
