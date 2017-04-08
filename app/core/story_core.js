@@ -6,12 +6,28 @@ export function setTimeoutId(state, timeoutId) {
     return state.set('timeoutId', timeoutId);
 }
 
+export function setFeaturedStories(state, featuredStories) {
+    return state.set('featuredStories', featuredStories)
+}
 
-export function fetchStories() {
-    return fetch('https://storybox-145021.appspot.com/api/audio/list', {
+
+export function fetchStories(pageNum) {
+    var url = 'https://storybox-145021.appspot.com/api/audio/list?page=' + pageNum || 0;
+    return fetch(url, {
         method: 'get',
     }).then((res) => {
-        return res.json()
+        return res.json();
+    }).then((resJson) => {
+        return sortStoriesByEvent(resJson);
+    })
+}
+
+export function fetchFeaturedStories() {
+    var url = 'https://storybox-145021.appspot.com/api/audio/featured';
+    return fetch(url, {
+        method: 'get',
+    }).then((res) => {
+        return res.json();
     }).then((resJson) => {
         return sortStoriesByEvent(resJson);
     })
@@ -66,3 +82,9 @@ export function formatDuration(time) {
         return minutes + ":" + seconds
     }
 }
+
+export function randomProperty(obj) {
+    var keys = Object.keys(obj)
+    return obj[keys[ keys.length * Math.random() << 0]];
+};
+

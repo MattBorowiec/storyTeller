@@ -30,19 +30,19 @@ class StoryComponent extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <TouchableOpacity
                     onPress={this.onPress.bind(this)}
                 >
-                    <View style={styles.storyContainer}>
-                        <View style={styles.playBar}>
-                            <View style={styles.buttonContainer}>
+                    <View style={[styles.storyContainer, this.props.borderColor]}>
+                        <View style={[styles.playBar, this.props.borderColor]}>
+                            <View style={[styles.buttonContainer, this.props.borderColor]}>
                                 <Image
-                                    style={styles.button}
+                                    style={[styles.button, this.props.tintColor]}
                                     source={require('../../../img/play-arrow-chalk-red.png')}/>
                             </View>
                             <View style={styles.durationContainer}>
-                                <Text style={styles.soundLength}>{formatDuration(this.props.duration)}</Text>
+                                <Text style={[styles.soundLength, this.props.color, this.props.borderColor]}>{formatDuration(this.props.duration)}</Text>
                             </View>
                         </View>
                     </View>
@@ -50,17 +50,18 @@ class StoryComponent extends Component {
             </View>
         );
     };
-}
-;
+};
 
 
 const styles = {
+    container: {
+      height: 100
+    },
     storyContainer: {
-        borderWidth: 2,
-        //borderColor: 'gray',
-        //height: Dimensions.get('window').height / 8,
+        borderWidth: 4,
         margin: 10,
-        width: Dimensions.get('window').width / 4
+        width: Dimensions.get('window').width / 4,
+        borderRadius: 18
     },
     button: {
         //resizeMode: "center"
@@ -68,8 +69,7 @@ const styles = {
         //height: 55
     },
     buttonContainer: {
-        borderRightColor: "#a63b3b",
-        borderRightWidth: 1
+        borderRightWidth: 3
     },
     blurbContainer: {
         flex: 3,
@@ -86,14 +86,12 @@ const styles = {
     playBar: {
         flex: 3,
         flexDirection: 'row',
-        borderWidth: 2,
-        borderColor: '#a63b3b',
+        // borderWidth: 2,
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: "black"
+        backgroundColor: "transparent"
     },
     soundLength: {
-        color: '#a63b3b',
         fontSize: 50,
         textAlign: "center",
         fontFamily: "curious"
