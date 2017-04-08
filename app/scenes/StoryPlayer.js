@@ -7,6 +7,8 @@ import Sound from 'react-native-sound';
 import { Actions } from 'react-native-router-flux';
 import { store } from '../index'
 import { formatDuration } from '../core/story_core'
+import { Colors, ThemeBorderColors, ThemeTintColors } from '../stylesheets/theme';
+import { randomProperty } from '../core/story_core'
 
 
 class StoryPlayer extends Component {
@@ -50,7 +52,7 @@ class StoryPlayer extends Component {
                 });
             })
             .catch((errorMessage) => {
-                console.log("StoryTeller::RNFetchBlob::Error:: " + errorMessage);
+                // console.log("StoryTeller::RNFetchBlob::Error:: " + errorMessage);
             });
     }
 

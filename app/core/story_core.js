@@ -82,3 +82,9 @@ export function formatDuration(time) {
         return minutes + ":" + seconds
     }
 }
+
+export function randomProperty(obj) {
+    var keys = Object.keys(obj)
+    return obj[keys[ keys.length * Math.random() << 0]];
+};
+

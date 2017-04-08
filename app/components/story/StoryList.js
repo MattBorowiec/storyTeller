@@ -3,6 +3,9 @@ import { View, Image, Text, TouchableOpacity, ScrollView, Animated, Easing, Aler
 import StoryComponent from './StoryComponent.js';
 import  Hr from 'react-native-hr';
 import Dimensions from 'Dimensions';
+import { Colors, ThemeBorderColors, ThemeTintColors } from '../../stylesheets/theme';
+import { randomProperty } from '../../core/story_core';
+
 
 
 class StoryList extends Component {
@@ -17,7 +20,9 @@ class StoryList extends Component {
                                                                           duration={story.duration}
                                                                           event_time={this.props.event_time}
                                                                           event_location={this.props.event_location}
-        />)
+                                                                          color={randomProperty(Colors)}
+                                                                          borderColor={randomProperty(ThemeBorderColors)}
+                                                                          tintColor={randomProperty(ThemeTintColors)}/>)
     }
 
 
@@ -29,9 +34,7 @@ class StoryList extends Component {
                     <Text style={styles.eventTime}> {this.props.event_time}</Text>
                 </Text>
                 <Hr lineColor="#7a7c7f"/>
-                <View
-                    style={styles.scrollContainer}
-                >
+                <View style={styles.scrollContainer}>
                     {this.renderStoryComponents()}
                 </View>
             </View>
