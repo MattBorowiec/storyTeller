@@ -15,15 +15,13 @@ class StoryList extends Component {
 
 
     renderStoryComponents() {
-        const {event_stories, event_time, event_location, color, borderColor, tintColor} = this.props;
+        const {event_stories, event_time, event_location, color} = this.props;
         return event_stories.map((story, i) => <StoryComponent key={story.public_url} name={'story' + i}
                                                                           index={i} url={story.public_url}
                                                                           duration={story.duration}
                                                                           event_time={event_time}
                                                                           event_location={event_location}
-                                                                          color={color}
-                                                                          borderColor={borderColor}
-                                                                          tintColor={tintColor}/>)
+                                                                          color={color}/>)
     }
 
 
@@ -31,10 +29,10 @@ class StoryList extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.headerText}>
-                    <Text style={[styles.eventLocation, this.props.color]}>{this.props.event_location}</Text>
-                    <Text style={[styles.eventTime, this.props.color]}> {this.props.event_time}</Text>
+                    <Text style={[styles.eventLocation, {color: this.props.color}]}>{this.props.event_location}</Text>
+                    <Text style={[styles.eventTime, {color: this.props.color}]}> {this.props.event_time}</Text>
                 </Text>
-                <Image  style={this.props.tintColor} source={require("../../../img/chalk-hr-thin.png")} />
+                <Image  style={{tintColor: this.props.color}} source={require("../../../img/chalk-hr-thin.png")} />
                 <View style={styles.scrollContainer}>
                     {this.renderStoryComponents()}
                 </View>

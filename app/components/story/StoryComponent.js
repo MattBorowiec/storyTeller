@@ -34,15 +34,15 @@ class StoryComponent extends Component {
                 <TouchableOpacity
                     onPress={this.onPress.bind(this)}
                 >
-                    <View style={[styles.storyContainer, this.props.borderColor]}>
-                        <View style={[styles.playBar, this.props.borderColor]}>
-                            <View style={[styles.buttonContainer, this.props.borderColor]}>
+                    <View style={[styles.storyContainer,{borderColor: this.props.color}]}>
+                        <View style={[styles.playBar, {borderColor: this.props.color}]}>
+                            <View style={[styles.buttonContainer, {borderColor: this.props.color}]}>
                                 <Image
-                                    style={[styles.button, this.props.tintColor]}
+                                    style={[styles.button, {tintColor: this.props.color}]}
                                     source={require('../../../img/play-arrow-chalk-red.png')}/>
                             </View>
                             <View style={styles.durationContainer}>
-                                <Text style={[styles.soundLength, this.props.color, this.props.borderColor]}>{formatDuration(this.props.duration)}</Text>
+                                <Text style={[styles.soundLength, this.props.color, {borderColor: this.props.color}]}>{formatDuration(this.props.duration)}</Text>
                             </View>
                         </View>
                     </View>

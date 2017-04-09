@@ -8,7 +8,7 @@ import testJson from '../test.json';
 import { Actions } from 'react-native-router-flux';
 import { store } from '../index'
 import { fetchStories, cycleColorProperties } from '../core/story_core';
-import { Colors, ThemeBorderColors, ThemeTintColors } from '../stylesheets/theme';
+import { Colors } from '../stylesheets/theme';
 
 class StoryContainer extends Component {
     constructor(props) {
@@ -24,8 +24,7 @@ class StoryContainer extends Component {
                                                                event_location={event.event_location}
                                                                event_stories={event.event_stories}
                                                                color={cycleColorProperties(Colors, i)}
-                                                               borderColor={cycleColorProperties(ThemeBorderColors, i)}
-                                                               tintColor={cycleColorProperties(ThemeTintColors, i)}
+
         />);
     }
 
@@ -35,8 +34,6 @@ class StoryContainer extends Component {
                                                                        event_location={"Featured Stories"}
                                                                        event_stories={event.event_stories}
                                                                        color={cycleColorProperties(Colors, 3)}
-                                                                       borderColor={cycleColorProperties(ThemeBorderColors, 3)}
-                                                                       tintColor={cycleColorProperties(ThemeTintColors, 3)}
         />)
     }
 
