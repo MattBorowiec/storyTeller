@@ -42,7 +42,7 @@ class StoryComponent extends Component {
                                     source={require('../../../img/play-arrow-chalk-red.png')}/>
                             </View>
                             <View style={styles.durationContainer}>
-                                <Text style={[styles.soundLength, this.props.color, {borderColor: this.props.color}]}>{formatDuration(this.props.duration)}</Text>
+                                <Text style={[styles.soundLength, {color: this.props.color, borderColor: this.props.color}]}>{formatDuration(this.props.duration)}</Text>
                             </View>
                         </View>
                     </View>
