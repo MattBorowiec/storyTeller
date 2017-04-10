@@ -41,8 +41,8 @@ class sideWindow extends Component {
             outputRange: [-Dimensions.get('window').width / 3 + 5, 0]
         });
 
-        const outArrow = require('../../../img/cheveron-right.png');
-        const inArrow = require('../../../img/cheveron-left.png');
+        const outArrow = require('../../../img/button-box-arrow-right.png');
+        const inArrow = require('../../../img/button-box-arrow-left.png');
         let arrowURI = !this.state.showing ? outArrow : inArrow;
 
         return (
@@ -75,12 +75,13 @@ class sideWindow extends Component {
                         CuriousEar.com
                     </Text>
                 </View>
+                <Image source={require("../../../img/chalk-border-horizontal.png")} style={{tintColor: '#4e8fb5', backgroundColor: 'black'}} />
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
-                        style={styles.infoWindowButton}
+                        activeOpacity={1}
                         onPress={this.windowSlide.bind(this)}
                     >
-                        <Image source={arrowURI} style={{ margin: 6, alignSelf: 'center', height: 40, width: 40}}/>
+                        <Image source={arrowURI} style={{ tintColor: '#4e8fb5', alignSelf: 'center', backgroundColor: 'black'}}/>
                     </TouchableOpacity>
                 </View>
             </Animated.View>
@@ -102,8 +103,6 @@ const styles = {
         width: Dimensions.get('window').width / 3,
         backgroundColor: 'black',
         padding: 20,
-        borderRightWidth: 2,
-        borderRightColor: "#4e8fb5",
         zIndex: 2
     },
     infoTextHeader: {
@@ -114,32 +113,13 @@ const styles = {
     buttonContainer: {
         alignSelf: 'center',
         padding: 1,
-        backgroundColor: 'black'
-    },
-    infoWindowButton: {
-        height: 65,
-        width: 65,
-        marginLeft: 10,
-        borderRadius: 32,
-        borderColor: '#4e8fb5',
-        borderWidth: 5,
-        ///// previous styles
-        // borderRightWidth: 1,
-        // borderRightColor: "#4e8fb5",
-        // borderTopWidth: 1,
-        // borderTopColor: "#4e8fb5",
-        // borderBottomWidth: 1,
-        // borderBottomColor: "#4e8fb5",
-        // borderLeftWidth: 1,
-
-        borderLeftColor: "black",
-        zIndex: 1
+        backgroundColor: 'transparent',
+        marginLeft: -19
     },
     infoTextBody: {
         color: "white",
         fontSize: 26,
         fontFamily: "curious"
-
     },
     learnMoreContainer: {
         borderColor: "white",
