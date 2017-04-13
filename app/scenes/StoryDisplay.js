@@ -7,7 +7,8 @@ import Dimensions from 'Dimensions';
 import testJson from '../test.json';
 import { Actions } from 'react-native-router-flux';
 import { store } from '../index'
-import { fetchStories } from '../core/story_core'
+import { fetchStories, cycleColorProperties } from '../core/story_core';
+import { Colors } from '../stylesheets/theme';
 
 class StoryContainer extends Component {
     constructor(props) {
@@ -22,6 +23,8 @@ class StoryContainer extends Component {
         return this.props.stories.map((event, i) => <StoryList key={i} event_time={event.event_time}
                                                                event_location={event.event_location}
                                                                event_stories={event.event_stories}
+                                                               color={cycleColorProperties(Colors, i)}
+
         />);
     }
 
@@ -29,7 +32,9 @@ class StoryContainer extends Component {
         return this.props.featuredStories.map((event, i) => <StoryList key={"featured-list-1"}
                                                                        event_time={event.event_time}
                                                                        event_location={"Featured Stories"}
-                                                                       event_stories={event.event_stories}/>)
+                                                                       event_stories={event.event_stories}
+                                                                       color={cycleColorProperties(Colors, 3)}
+        />)
     }
 
     close() {

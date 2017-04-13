@@ -83,8 +83,23 @@ export function formatDuration(time) {
     }
 }
 
-export function randomProperty(obj) {
+export function randomColorProperty(obj) {
     var keys = Object.keys(obj)
     return obj[keys[ keys.length * Math.random() << 0]];
 };
+
+//This function is not something I'm all that fond of actually, but it works seemingly. Feel free to refactor :)
+export function cycleColorProperties(obj,index) {
+    var keys = Object.keys(obj),
+        length = Object.keys(obj).length,
+        reset = 0;
+        if (reset >= length) {
+            reset = 0;
+        }
+        if (index >= length) {
+            index = reset;
+            reset ++;
+        }
+    return obj[keys[index]];
+}
 
