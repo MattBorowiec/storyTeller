@@ -2,10 +2,6 @@ export function setStories(state, stories) {
     return state.set('stories', stories);
 }
 
-export function setTimeoutId(state, timeoutId) {
-    return state.set('timeoutId', timeoutId);
-}
-
 export function setFeaturedStories(state, featuredStories) {
     return state.set('featuredStories', featuredStories)
 }
@@ -21,6 +17,7 @@ export function fetchStories(pageNum) {
         return sortStoriesByEvent(resJson);
     })
 }
+
 
 export function fetchFeaturedStories() {
     var url = 'https://storybox-145021.appspot.com/api/audio/featured';

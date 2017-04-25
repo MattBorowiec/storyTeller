@@ -2,8 +2,7 @@ import { View, Image, Text, TouchableOpacity} from 'react-native';
 import React, { Component } from 'react';
 import Dimensions from 'Dimensions';
 import { Actions } from 'react-native-router-flux';
-import{ StoryReducer } from '../../reducers/story_reducer';
-import { store } from '../../index';
+import { connect } from 'react-redux';
 import { formatDuration } from '../../core/story_core'
 
 
@@ -17,9 +16,7 @@ class StoryComponent extends Component {
 
 
     onPress() {
-        var state = store.getState();
-        clearTimeout(state.get('timeoutId'));
-
+        clearTimeout(this.props.timeoutId);
         Actions.StoryPlayer({
             url: this.props.url,
             name: this.props.name,
@@ -103,4 +100,10 @@ const styles = {
     }
 };
 
-export default StoryComponent;
+const mapStateToProps = (state) => {
+    return {
+        timeoutId: state.getIn(['sequences', 'timeoutId'])
+    }
+}
+
+export default connect(mapStateToProps)(StoryComponent);

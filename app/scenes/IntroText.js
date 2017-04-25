@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        stories: state.get('stories')
+        stories: state.getIn(['stories','stories'])
     }
 };
 

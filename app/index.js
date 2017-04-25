@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import {Provider} from 'react-redux';
 import { createStore} from 'redux';
-import StoryReducer from './reducers/story_reducer';
 import  Navigator  from './navigator/navigator';
 import {fetchStories, fetchFeaturedStories} from './core/story_core';
 
-export const store = createStore(StoryReducer);
-
+import store from './reducers/reducers'
 
 
 export default class App extends Component {

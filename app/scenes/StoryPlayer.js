@@ -5,7 +5,6 @@ import Dimensions from 'Dimensions';
 import RNFetchBlob from 'react-native-fetch-blob'
 import Sound from 'react-native-sound';
 import { Actions } from 'react-native-router-flux';
-import { store } from '../index'
 import { formatDuration } from '../core/story_core'
 import { Colors, ThemeBorderColors, ThemeTintColors } from '../stylesheets/theme';
 import { randomProperty } from '../core/story_core'
@@ -104,7 +103,7 @@ class StoryPlayer extends Component {
         var id = setTimeout(()=> {
            Actions.popTo('Landing')
         }, 120000);
-        store.dispatch({type: 'SET_TIMEOUT_ID', timeoutId: id});
+        this.props.dispatch({type: 'SET_TIMEOUT_ID', timeoutId: id});
     }
 
 
@@ -249,7 +248,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
     return {
-        stories: state.get('stories')
+        stories: state.getIn(['stories', 'stories'])
     }
 };
 

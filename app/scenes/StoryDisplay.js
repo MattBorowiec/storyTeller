@@ -6,7 +6,6 @@ import SideWindow from '../components/common/SideWindow';
 import Dimensions from 'Dimensions';
 import testJson from '../test.json';
 import { Actions } from 'react-native-router-flux';
-import { store } from '../index'
 import { fetchStories, cycleColorProperties } from '../core/story_core';
 import { Colors } from '../stylesheets/theme';
 
@@ -29,7 +28,7 @@ class StoryContainer extends Component {
     }
 
     renderFeaturedStoryList() {
-        return this.props.featuredStories.map((event, i) => <StoryList key={"featured-list-1"}
+        return this.props.featuredStories.map((event, i) => <StoryList key={i}
                                                                        event_time={event.event_time}
                                                                        event_location={"Featured Stories"}
                                                                        event_stories={event.event_stories}
@@ -45,19 +44,19 @@ class StoryContainer extends Component {
         var id = setTimeout(()=> {
             this.close()
         }, 120000);
-        store.dispatch({type: 'SET_TIMEOUT_ID', timeoutId: id});
+        this.props.dispatch({type: 'SET_TIMEOUT_ID', timeoutId: id});
     }
 
     previousPage() {
         this.setState({is_loading: true});
         if (this.state.page_number > 0) {
             fetchStories(this.state.page_number - 1).done((stories) => {
-                store.dispatch({type: 'SET_STORIES', state: stories});
+                this.props.dispatch({type: 'SET_STORIES', state: stories});
                 this.setState({page_number: this.state.page_number - 1, is_loading: false});
             });
         } else {
             fetchStories().done((stories) => {
-                store.dispatch({type: 'SET_STORIES', state: stories});
+                this.props.dispatch({type: 'SET_STORIES', state: stories});
                 this.setState({page_number: 0, is_loading: false});
             });
         }
@@ -69,7 +68,7 @@ class StoryContainer extends Component {
             if (stories.length === 0) {
                 return this.setState({is_loading: false});
             }
-            store.dispatch({type: 'SET_STORIES', state: stories});
+            this.props.dispatch({type: 'SET_STORIES', state: stories});
             this.setState({page_number: this.state.page_number + 1, is_loading: false});
         });
     }
@@ -182,8 +181,8 @@ const styles = {
 
 const mapStateToProps = (state) => {
     return {
-        stories: state.get('stories'),
-        featuredStories: state.get('featuredStories')
+        stories: state.getIn(['stories','stories']),
+        featuredStories: state.getIn(['stories', 'featuredStories'])
     }
 };
 
