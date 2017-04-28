@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { StyleSheet, View, Image, Text, TouchableHighlight } from 'react-native';
 import Dimensions from 'Dimensions';
 import { Actions } from 'react-native-router-flux';
@@ -57,4 +56,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps)(IntroText);
+export default IntroText;
