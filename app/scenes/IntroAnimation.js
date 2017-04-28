@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        stories: state.get('stories')
+        stories: state.get('stories'),
+        featuredStories: state.get('featuredStories')
     }
 };
 
