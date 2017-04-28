@@ -22,7 +22,7 @@ class StoryContainer extends Component {
         return this.props.stories.map((event, i) => <StoryList key={'story' + i} event_time={event.event_time}
                                                                event_location={event.event_location}
                                                                event_stories={event.event_stories}
-                                                               color={Colors[i]}
+                                                               color={Colors[i % 6]}
                                                                isFeatured={false}/>);
     }
 
