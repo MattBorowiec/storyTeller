@@ -4,7 +4,6 @@ import Dimensions from 'Dimensions';
 import { Actions } from 'react-native-router-flux';
 import{ StoryReducer } from '../../reducers/story_reducer';
 import { store } from '../../index';
-import { formatDuration } from '../../core/story_core'
 
 
 
@@ -42,7 +41,7 @@ class StoryComponent extends Component {
                                     source={require('../../../img/play-arrow-chalk-red.png')}/>
                             </View>
                             <View style={styles.durationContainer}>
-                                <Text style={[styles.soundLength, {color: this.props.color, borderColor: this.props.color}]}>{formatDuration(this.props.duration)}</Text>
+                                <Text style={[styles.soundLength, {color: this.props.color, borderColor: this.props.color}]}>{this.props.duration}</Text>
                             </View>
                         </View>
                     </View>
