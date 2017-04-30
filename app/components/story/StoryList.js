@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image, Text, TouchableOpacity, ScrollView, Animated, Easing, Alert } from 'react-native';
 import StoryComponent from './StoryComponent.js';
-import  Hr from 'react-native-hr';
 import Dimensions from 'Dimensions';
 import { Colors, ThemeBorderColors, ThemeTintColors } from '../../stylesheets/theme';
 
@@ -15,15 +14,22 @@ class StoryList extends Component {
 
 
     renderStoryComponents() {
-        const {event_stories, event_time, event_location, color} = this.props;
-        return event_stories.map((story, i) => <StoryComponent key={story.public_url} name={'story' + i}
+        return this.props.event_stories.map((story, i) => <StoryComponent key={story.public_url} name={'story' + i}
                                                                           index={i} url={story.public_url}
                                                                           duration={story.duration}
-                                                                          event_time={event_time}
-                                                                          event_location={event_location}
-                                                                          color={color}/>)
+                                                                          event_time={this.props.event_time}
+                                                                          event_location={this.props.event_location}
+                                                                          color={this.props.color}/>)
     }
 
+    renderFeaturedStories() {
+        return this.props.featuredStories.map((featStory, i) => <StoryComponent key={'featStory' + i} name={'featStory' + i}
+                                                                            index={i} url={featStory.public_url}
+                                                                            duration={featStory.length_in_seconds}
+                                                                            event_location={this.props.event_location}
+                                                                            color={this.props.color}/>)
+
+    }
 
     render() {
         return (
@@ -32,9 +38,13 @@ class StoryList extends Component {
                     <Text style={[styles.eventLocation, {color: this.props.color}]}>{this.props.event_location}</Text>
                     <Text style={[styles.eventTime, {color: this.props.color}]}> {this.props.event_time}</Text>
                 </Text>
-                <Image  style={{tintColor: this.props.color}} source={require("../../../img/chalk-hr-thin.png")} />
+                <Image style={{tintColor: this.props.color}} source={require("../../../img/chalk-hr-thin.png")}/>
                 <View style={styles.scrollContainer}>
-                    {this.renderStoryComponents()}
+                    { this.props.isFeatured ?
+                        this.renderFeaturedStories()
+                        : this.renderStoryComponents()
+                    }
+
                 </View>
             </View>
         )

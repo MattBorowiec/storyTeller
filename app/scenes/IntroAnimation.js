@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import Dimensions from 'Dimensions';
 import { Actions } from 'react-native-router-flux';
@@ -74,10 +73,4 @@ const styles = StyleSheet.create({
 
 });
 
-const mapStateToProps = (state) => {
-    return {
-        stories: state.get('stories')
-    }
-};
-
-export default connect(mapStateToProps)(IntroAnimation);
+export default IntroAnimation;

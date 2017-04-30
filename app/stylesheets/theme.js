@@ -3,12 +3,12 @@ import {StyleSheet} from 'react-native';
 
 //Color Scheme:
 
-export const Colors = {
-    blue: '#316a83',
-    white: '#909090',
-    red: '#962627',
-    green: '#5f7e51',
-    purple: '#5b456c',
-    orange: '#9d6e51'
-};
+export const Colors = [
+    '#316a83', //blue
+    '#909090', //white
+    '#962627', //red
+    '#5f7e51', //green
+    '#5b456c', //purple
+    '#9d6e51'  //orange
+];
 

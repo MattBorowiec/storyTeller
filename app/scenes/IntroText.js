@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { StyleSheet, View, Image, Text, TouchableHighlight } from 'react-native';
 import Dimensions from 'Dimensions';
 import { Actions } from 'react-native-router-flux';
@@ -52,8 +51,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        stories: state.get('stories')
+        stories: state.get('stories'),
+        featuredStories: state.get('featuredStories')
     }
 };
 
-export default connect(mapStateToProps)(IntroText);
+export default IntroText;
