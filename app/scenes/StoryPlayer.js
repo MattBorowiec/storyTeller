@@ -238,8 +238,6 @@ const styles = {
         alignItems: "center"
     },
     playingImg: {
-        // flex: 1,
-        // resizeMode: "stretch",
         width: Dimensions.get("window").width + 100
     }
 

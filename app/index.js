@@ -4,9 +4,15 @@ import {Provider} from 'react-redux';
 import { createStore} from 'redux';
 import  Navigator  from './navigator/navigator';
 import {fetchStories, fetchFeaturedStories} from './core/story_core';
-
+import { ColorSequencer } from './core/sequence_core';
 import store from './reducers/reducers'
+import {Colors} from './stylesheets/theme';
 
+
+//begin color interpolation
+const colorSequencer = new ColorSequencer(store, Colors);
+colorSequencer.setColorValues();
+colorSequencer.start();
 
 export default class App extends Component {
   constructor(props) {
@@ -22,6 +28,9 @@ export default class App extends Component {
     fetchFeaturedStories().done((featuredStories) => {
       store.dispatch({type: 'SET_FEATURED_STORIES', featuredStories: featuredStories});
     });
+
+
+
   }
 
   render() {
