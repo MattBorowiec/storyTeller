@@ -58,14 +58,6 @@ class sideWindow extends Component {
                         grounds we share.
                     </Text>
                     <Text></Text>
-                    <Text style={styles.infoTextBody}>
-                        We do this by listening to each other. Not just to those
-                        already in our circles, but to those outside as well.
-                        Nursing homes. Elementary Schools. Homeless
-                        shelters. We all have stories that deserve to be heard.
-                        By sharing our experiences, our perspective grows, as
-                        does the strength of our community.
-                    </Text>
                     <Text></Text>
                     <Text style={styles.infoTextBody}>
                         Curious Ear is artists, coders, writers, dreamers.
@@ -102,7 +94,9 @@ const styles = {
         flex: 1,
         width: Dimensions.get('window').width / 3,
         backgroundColor: 'black',
-        padding: 20,
+        paddingTop: 50,
+        paddingBottom: 40,
+        paddingLeft: 20,
         zIndex: 2
     },
     infoTextHeader: {
@@ -118,7 +112,7 @@ const styles = {
     },
     infoTextBody: {
         color: "white",
-        fontSize: 26,
+        fontSize: 30,
         fontFamily: "curious"
     },
     learnMoreContainer: {

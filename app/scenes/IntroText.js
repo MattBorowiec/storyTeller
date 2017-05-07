@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { StyleSheet, View, Image, Text, TouchableHighlight } from 'react-native';
 import Dimensions from 'Dimensions';
 import { Actions } from 'react-native-router-flux';
@@ -15,7 +14,7 @@ class IntroText extends Component {
     }
 
     componentDidMount() {
-        setTimeout(this._transitionToAnimation, 4000);
+        setTimeout(this._transitionToAnimation, 2500);
     }
 
     render() {
@@ -52,8 +51,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        stories: state.getIn(['stories','stories'])
+        stories: state.getIn(['stories','stories']),
+        featuredStories: state.getIn(['stories', 'featuredStories'])
     }
 };
 
-export default connect(mapStateToProps)(IntroText);
+export default IntroText;

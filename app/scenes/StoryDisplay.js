@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import StoryList from '../components/story/StoryList';
 import SideWindow from '../components/common/SideWindow';
 import Dimensions from 'Dimensions';
-import testJson from '../test.json';
 import { Actions } from 'react-native-router-flux';
-import { fetchStories, cycleColorProperties } from '../core/story_core';
+import { fetchStories } from '../core/story_core';
 import { Colors } from '../stylesheets/theme';
 
 class StoryContainer extends Component {
@@ -14,26 +13,21 @@ class StoryContainer extends Component {
         super(props);
         this.state = {
             page_number: 0,
-            is_loading: false,
+            is_loading: false
         }
     }
 
     renderStoryLists() {
-        return this.props.stories.map((event, i) => <StoryList key={i} event_time={event.event_time}
+        return this.props.stories.map((event, i) => <StoryList key={'story' + i} event_time={event.event_time}
                                                                event_location={event.event_location}
                                                                event_stories={event.event_stories}
-                                                               color={cycleColorProperties(Colors, i)}
-
-        />);
+                                                               color={Colors[i % 6]}
+                                                               isFeatured={false}/>);
     }
 
     renderFeaturedStoryList() {
-        return this.props.featuredStories.map((event, i) => <StoryList key={i}
-                                                                       event_time={event.event_time}
-                                                                       event_location={"Featured Stories"}
-                                                                       event_stories={event.event_stories}
-                                                                       color={cycleColorProperties(Colors, 3)}
-        />)
+        return <StoryList color={Colors[3]} isFeatured={true} event_location={"Featured Stories"}
+                          featuredStories={this.props.featuredStories} event_stories={[]}/>
     }
 
     close() {

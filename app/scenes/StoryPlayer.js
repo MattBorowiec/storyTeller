@@ -102,8 +102,8 @@ class StoryPlayer extends Component {
     setNewTimeout() {
         var id = setTimeout(()=> {
            Actions.popTo('Landing')
-        }, 120000);
-        this.props.dispatch({type: 'SET_TIMEOUT_ID', timeoutId: id});
+        }, 300000);
+        store.dispatch({type: 'SET_TIMEOUT_ID', timeoutId: id});
     }
 
 
