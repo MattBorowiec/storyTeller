@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Image, Text, TouchableOpacity, ScrollView, Animated, Easing, Alert } from 'react-native';
 import StoryComponent from './StoryComponent.js';
-import  Hr from 'react-native-hr';
+import Dimensions from 'Dimensions';
 import { Colors, ThemeBorderColors, ThemeTintColors } from '../../stylesheets/theme';
-import { randomProperty } from '../../core/story_core'
+
 
 
 
@@ -19,38 +19,52 @@ class StoryList extends Component {
                                                                           duration={story.duration}
                                                                           event_time={this.props.event_time}
                                                                           event_location={this.props.event_location}
-                                                                          color={randomProperty(Colors)}
-                                                                          borderColor={randomProperty(ThemeBorderColors)}
-                                                                          tintColor={randomProperty(ThemeTintColors)}
-        />)
+                                                                          color={this.props.color}/>)
     }
 
+    renderFeaturedStories() {
+        return this.props.featuredStories.map((featStory, i) => <StoryComponent key={'featStory' + i} name={'featStory' + i}
+                                                                            index={i} url={featStory.public_url}
+                                                                            duration={featStory.length_in_seconds}
+                                                                            event_location={this.props.event_location}
+                                                                            color={this.props.color}/>)
+
+    }
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <Text style={styles.headerText}>
-                    <Text style={styles.eventLocation}>{this.props.event_location}</Text>
-                    <Text style={styles.eventTime}> {this.props.event_time}</Text>
+                    <Text style={[styles.eventLocation, {color: this.props.color}]}>{this.props.event_location}</Text>
+                    <Text style={[styles.eventTime, {color: this.props.color}]}> {this.props.event_time}</Text>
                 </Text>
-                <Hr lineColor="#7a7c7f"/>
-                <ScrollView
-                    style={styles.scrollContainer}
-                    horizontal={true}
-                >
-                    {this.renderStoryComponents()}
-                </ScrollView>
+                <Image style={{tintColor: this.props.color}} source={require("../../../img/chalk-hr-thin.png")}/>
+                <View style={styles.scrollContainer}>
+                    { this.props.isFeatured ?
+                        this.renderFeaturedStories()
+                        : this.renderStoryComponents()
+                    }
+
+                </View>
             </View>
         )
     }
 }
 
 const styles = {
+    container: {
+        width: Dimensions.get("window").width - 30,
+        marginBottom: 25
+    },
     scrollContainer: {
-        paddingLeft: 40
+        paddingLeft: 40,
+        paddingRight: 40,
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "space-between"
     },
     headerText: {
-        fontFamily: "curious",
+        fontFamily: "curious"
     },
     eventLocation: {
         color: "white",
@@ -60,7 +74,7 @@ const styles = {
     eventTime: {
         color: "white",
         fontSize: 40
-    },
+    }
 };
 
 export default StoryList;

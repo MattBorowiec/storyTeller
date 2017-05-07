@@ -4,7 +4,6 @@ import Dimensions from 'Dimensions';
 import { Actions } from 'react-native-router-flux';
 import{ StoryReducer } from '../../reducers/story_reducer';
 import { store } from '../../index';
-import { formatDuration } from '../../core/story_core'
 
 
 
@@ -30,19 +29,19 @@ class StoryComponent extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <TouchableOpacity
                     onPress={this.onPress.bind(this)}
                 >
-                    <View style={[styles.storyContainer, this.props.borderColor]}>
-                        <View style={[styles.playBar, this.props.borderColor]}>
-                            <View style={[styles.buttonContainer, this.props.borderColor]}>
+                    <View style={[styles.storyContainer,{borderColor: this.props.color}]}>
+                        <View style={[styles.playBar, {borderColor: this.props.color}]}>
+                            <View style={[styles.buttonContainer, {borderColor: this.props.color}]}>
                                 <Image
-                                    style={[styles.button, this.props.tintColor]}
+                                    style={[styles.button, {tintColor: this.props.color}]}
                                     source={require('../../../img/play-arrow-chalk-red.png')}/>
                             </View>
                             <View style={styles.durationContainer}>
-                                <Text style={[styles.soundLength, this.props.color, this.props.borderColor]}>{formatDuration(this.props.duration)}</Text>
+                                <Text style={[styles.soundLength, {color: this.props.color, borderColor: this.props.color}]}>{this.props.duration}</Text>
                             </View>
                         </View>
                     </View>
@@ -50,11 +49,13 @@ class StoryComponent extends Component {
             </View>
         );
     };
-}
-;
+};
 
 
 const styles = {
+    container: {
+      height: 100
+    },
     storyContainer: {
         borderWidth: 4,
         margin: 10,

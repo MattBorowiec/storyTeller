@@ -6,16 +6,37 @@ export function setTimeoutId(state, timeoutId) {
     return state.set('timeoutId', timeoutId);
 }
 
+export function setFeaturedStories(state, featuredStories) {
+    return state.set('featuredStories', featuredStories)
+}
 
-export function fetchStories() {
-    return fetch('https://storybox-145021.appspot.com/api/audio/list', {
+
+export function fetchStories(pageNum) {
+    var url = 'https://storybox-145021.appspot.com/api/audio/list?page=' + pageNum || 0;
+    return fetch(url, {
         method: 'get',
     }).then((res) => {
-        return res.json()
+        return res.json();
     }).then((resJson) => {
         return sortStoriesByEvent(resJson);
     })
 }
+
+export function fetchFeaturedStories() {
+    var url = 'https://storybox-145021.appspot.com/api/audio/featured';
+    return fetch(url, {
+        method: 'get',
+    }).then((res) => {
+        return res.json();
+    }).then((resJson) => {
+        resJson.forEach(function(story) {
+            story.length_in_seconds = formatDuration(story.length_in_seconds)
+        });
+        return resJson;
+    })
+}
+
+
 
 function sortStoriesByEvent(storiesArray) {
     var outArr = [];
@@ -43,7 +64,7 @@ function sortStoriesByEvent(storiesArray) {
                 event.event_stories.push({
                     "public_url": story.public_url,
                     "timestamp": story.timestamp,
-                    "duration": story.length_in_seconds
+                    "duration": formatDuration(story.length_in_seconds)
                 });
             }
         });
@@ -66,9 +87,3 @@ export function formatDuration(time) {
         return minutes + ":" + seconds
     }
 }
-
-export function randomProperty(obj) {
-    var keys = Object.keys(obj)
-    return obj[keys[ keys.length * Math.random() << 0]];
-};
-
