@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import {Provider} from 'react-redux';
-import { createStore} from 'redux';
 import  Navigator  from './navigator/navigator';
 import {fetchStories, fetchFeaturedStories} from './core/story_core';
-import { ColorSequencer } from './core/sequence_core';
 import store from './reducers/reducers'
-import {Colors} from './stylesheets/theme';
-
-
-//begin color interpolation
-const colorSequencer = new ColorSequencer(store, Colors);
-colorSequencer.setColorValues();
-colorSequencer.start();
 
 export default class App extends Component {
   constructor(props) {
@@ -20,7 +11,6 @@ export default class App extends Component {
   }
 
   componentWillMount() {
-    //initial story fetching on app load
     fetchStories().done((stories) => {
       store.dispatch({type: 'SET_STORIES', state: stories});
     });

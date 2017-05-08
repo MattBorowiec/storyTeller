@@ -1,41 +1,38 @@
-import { Animated } from 'react-native';
+import { Animated, Easing } from 'react-native';
+
 
 export function setTimeoutId(state, timeoutId) {
     return state.set('timeoutId', timeoutId);
-}
-
-export function setColorValues(state, colorValues) {
-    return state.set('colorValues', colorValues );
-}
+};
 
 
 export class ColorSequencer {
-    constructor(store, colors) {
-        this.store = store;
-        this.colors = Object.keys(colors).map((item, key) => {
-            return colors[key];
-        });
+    constructor(colors) {
+        this.outputColors = Array.from(colors);
+        this.outputColors.push(colors[0]);
+        this.inputRange = colors.map((item, index) => index);
+        this.inputRange.push(colors.length);
         this.colorValue = new Animated.Value(0);
-        this.colorAnimations = Object.keys(colors).map((item, key) => {
-            return Animated.timing(
-                this.colorValue,
-                {
-                    toValue: key,
-                    duration: 50
-                }
-            )
-        });
         this.colorValueInt = this.colorValue.interpolate({
-            inputRange: [ ...Object.keys(this.colors)],
-            outputRange: [ ...this.colors ]
+            inputRange: this.inputRange,
+            outputRange: this.outputColors
         });
     }
 
-    start = function() {
-        Animated.sequence(this.colorAnimations).start(() => this.start());
-    };
-    setColorValues = function() {
-        this.store.dispatch({type: 'SET_COLOR_VALUES', colorValues: this.colorValueInt})
-    };
-}
+
+    start() {
+        this.colorValue.setValue(0);
+        Animated.timing(
+            this.colorValue,
+            {
+                toValue: this.inputRange.length,
+                duration: 5000,
+                easing: Easing.linear
+
+            }
+        ).start(() => this.start())
+    }
+};
+
+
 
