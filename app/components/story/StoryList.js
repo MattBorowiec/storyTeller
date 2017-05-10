@@ -24,29 +24,40 @@ class StoryList extends Component {
 
     renderFeaturedStories() {
         return this.props.featuredStories.map((featStory, i) => <StoryComponent key={'featStory' + i} name={'featStory' + i}
-                                                                            index={i} url={featStory.public_url}
+                                                                            index={i} isFeatured={true} url={featStory.public_url}
                                                                             duration={featStory.length_in_seconds}
                                                                             event_location={this.props.event_location}
-                                                                            color={this.props.color}/>)
+                                                                            featuredColors={this.props.featuredColors}/>)
 
     }
 
     render() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.headerText}>
-                    <Text style={[styles.eventLocation, {color: this.props.color}]}>{this.props.event_location}</Text>
-                    <Text style={[styles.eventTime, {color: this.props.color}]}> {this.props.event_time}</Text>
-                </Text>
-                <Image style={{tintColor: this.props.color}} source={require("../../../img/chalk-hr-thin.png")}/>
-                <View style={styles.scrollContainer}>
-                    { this.props.isFeatured ?
-                        this.renderFeaturedStories()
-                        : this.renderStoryComponents()
-                    }
-
+        <View>
+            { this.props.isFeatured ?
+                <View style={styles.container}>
+                    <Text style={styles.headerText}>
+                        <Animated.Text style={[styles.eventLocation, {color: this.props.featuredColors}]}>{this.props.event_location}</Animated.Text>
+                        <Animated.Text style={[styles.eventTime, {color: this.props.featuredColors}]}> {this.props.event_time}</Animated.Text>
+                    </Text>
+                    <Animated.Image style={{tintColor: this.props.featuredColors}} source={require("../../../img/chalk-hr-thin.png")}/>
+                    <View style={styles.scrollContainer}>
+                        {this.renderFeaturedStories()}
+                    </View>
                 </View>
-            </View>
+                :
+                <View style={styles.container}>
+                    <Text style={styles.headerText}>
+                        <Text style={[styles.eventLocation, {color: this.props.color}]}>{this.props.event_location}</Text>
+                        <Text style={[styles.eventTime, {color: this.props.color}]}> {this.props.event_time}</Text>
+                    </Text>
+                    <Image style={{tintColor: this.props.color}} source={require("../../../img/chalk-hr-thin.png")}/>
+                    <View style={styles.scrollContainer}>
+                        {this.renderStoryComponents()}
+                    </View>
+                </View>
+            }
+        </View>
         )
     }
 }

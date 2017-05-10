@@ -1,4 +1,4 @@
-import { View, Image, Text, TouchableOpacity} from 'react-native';
+import { View, Image, Text, TouchableOpacity, Animated} from 'react-native';
 import React, { Component } from 'react';
 import Dimensions from 'Dimensions';
 import { Actions } from 'react-native-router-flux';
@@ -30,18 +30,33 @@ class StoryComponent extends Component {
                 <TouchableOpacity
                     onPress={this.onPress.bind(this)}
                 >
-                    <View style={[styles.storyContainer,{borderColor: this.props.color}]}>
-                        <View style={[styles.playBar, {borderColor: this.props.color}]}>
-                            <View style={[styles.buttonContainer, {borderColor: this.props.color}]}>
-                                <Image
-                                    style={[styles.button, {tintColor: this.props.color}]}
-                                    source={require('../../../img/play-arrow-chalk-red.png')}/>
+                    {this.props.isFeatured ?
+                        <Animated.View style={[styles.storyContainer,{borderColor: this.props.featuredColors}]}>
+                            <View style={[styles.playBar, {borderColor: this.props.color}]}>
+                                <Animated.View style={[styles.buttonContainer, {borderColor: this.props.featuredColors}]}>
+                                    <Animated.Image
+                                        style={[{tintColor: this.props.featuredColors}, styles.button]}
+                                        source={require('../../../img/play-arrow-chalk-red.png')}/>
+                                </Animated.View>
+                                <View style={styles.durationContainer}>
+                                    <Animated.Text style={[styles.soundLength, {color: this.props.featuredColors, borderColor: this.props.featuredColors}]}>{this.props.duration}</Animated.Text>
+                                </View>
                             </View>
-                            <View style={styles.durationContainer}>
-                                <Text style={[styles.soundLength, {color: this.props.color, borderColor: this.props.color}]}>{this.props.duration}</Text>
+                        </Animated.View>
+                    :
+                        <View style={[styles.storyContainer,{borderColor: this.props.color}]}>
+                            <View style={[styles.playBar, {borderColor: this.props.color}]}>
+                                <View style={[styles.buttonContainer, {borderColor: this.props.color}]}>
+                                    <Image
+                                        style={[styles.button, {tintColor: this.props.color}]}
+                                        source={require('../../../img/play-arrow-chalk-red.png')}/>
+                                </View>
+                                <View style={styles.durationContainer}>
+                                    <Text style={[styles.soundLength, {color: this.props.color, borderColor: this.props.color}]}>{this.props.duration}</Text>
+                                </View>
                             </View>
                         </View>
-                    </View>
+                    }
                 </TouchableOpacity>
             </View>
         );

@@ -7,6 +7,7 @@ import Dimensions from 'Dimensions';
 import { Actions } from 'react-native-router-flux';
 import { fetchStories } from '../core/story_core';
 import { Colors } from '../stylesheets/theme';
+import { colorSequencer } from '../core/sequence_core';
 
 class StoryContainer extends Component {
     constructor(props) {
@@ -26,7 +27,7 @@ class StoryContainer extends Component {
     }
 
     renderFeaturedStoryList() {
-        return <StoryList color={Colors[3]} isFeatured={true} event_location={"Featured Stories"}
+        return <StoryList featuredColors={colorSequencer.colorValueInt} isFeatured={true} event_location={"Featured Stories"}
                           featuredStories={this.props.featuredStories} event_stories={[]}/>
     }
 

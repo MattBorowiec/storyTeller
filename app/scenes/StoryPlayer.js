@@ -9,10 +9,9 @@ import { formatDuration } from '../core/story_core'
 import { Colors } from '../stylesheets/theme';
 import { randomProperty } from '../core/story_core'
 import { Animated, Easing } from 'react-native';
+import { colorSequencer } from '../core/sequence_core';
 
-import { ColorSequencer } from '../core/sequence_core';
 
-var colorSequencer = new ColorSequencer(Colors);
 
 
 class StoryPlayer extends Component {
@@ -33,7 +32,6 @@ class StoryPlayer extends Component {
     }
 
     componentDidMount() {
-        colorSequencer.start();
         BackAndroid.addEventListener('hardwareBackPress', () => {
             return this._pressBack()
         });
@@ -63,7 +61,6 @@ class StoryPlayer extends Component {
     }
 
     componentWillUnmount() {
-        console.log('the fucking colors are', [...Colors]);
         BackAndroid.removeEventListener('hardwareBackPress');
         clearTimeout(this.countDownId);
     }
