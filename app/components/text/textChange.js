@@ -14,10 +14,10 @@ class TextChange extends Component {
             return (
                 <View>
                     <Text style={styles.text}>
-                        Here are voices from our communities,
+                        This is Curious Ear - A community engagement project, creating spaces for people to connect.
                     </Text>
                     <Text style={styles.text}>
-                        recorded at various Ears around our city.
+                        Here are voices from our communities, recorded at various Ears around our city.
                     </Text>
                 </View>
             )
@@ -42,7 +42,9 @@ const styles = StyleSheet.create({
     text: {
         color: "white",
         fontFamily: "curious",
-        fontSize: 40
+        fontSize: 40,
+        textAlign: "center",
+        marginBottom: 15
     }
 });
 

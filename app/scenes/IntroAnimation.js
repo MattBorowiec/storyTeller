@@ -35,7 +35,7 @@ class IntroAnimation extends Component {
                 <TextChange initialText={this.state.initialText}/>
                     <View style={styles.continueContainer}>
                         <Text style={styles.continueText}>
-                            Tap to Continue
+                            Tap Screen to Continue
                         </Text>
                     </View>
                 </TouchableOpacity>
@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
         paddingRight: 5,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 50
     },
     continueText: {
         fontSize: 40,

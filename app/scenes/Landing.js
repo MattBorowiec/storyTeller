@@ -10,7 +10,7 @@ class Landing extends Component {
     }
 
     _onPressButton() {
-        Actions.IntroText();
+        Actions.IntroAnimation();
     }
 
     render() {

@@ -56,13 +56,9 @@ class sideWindow extends Component {
                         people, who might not otherwise meet. In a time so heavily
                         marked by division, we seek to find the common
                         grounds we share.
-                    </Text>
-                    <Text></Text>
-                    <Text></Text>
-                    <Text style={styles.infoTextBody}>
+                        {'\n\n'}
                         Curious Ear is artists, coders, writers, dreamers.
                         Curious Ear is you.
-
                         To find out how to become a bigger part of it, or tell your story, find us at
                         CuriousEar.com
                     </Text>
