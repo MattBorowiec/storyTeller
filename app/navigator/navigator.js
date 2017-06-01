@@ -4,7 +4,6 @@ import Landing from '../scenes/Landing';
 import StoryDisplay from '../scenes/StoryDisplay';
 import StoryPlayer from '../scenes/StoryPlayer';
 import IntroAnimation from '../scenes/IntroAnimation'
-import IntroText from '../scenes/IntroText'
 
 
 export default class NavigatorComponent extends Component {
@@ -18,7 +17,6 @@ export default class NavigatorComponent extends Component {
     return <Router getSceneStyle={getSceneStyle}>
       <Scene key="root">
         <Scene duration={1000} hideNavBar={true} animation={'fade'} key="Landing" component={Landing} initial={true}/>
-        <Scene duration={1000} hideNavBar={true} animation={'fade'} key="IntroText" component={IntroText} />
         <Scene duration={1000} hideNavBar={true} animation={'fade'} key="IntroAnimation" component={IntroAnimation} />
         <Scene duration={1000} hideNavBar={true} animation={'fade'} key="StoryDisplay" component={StoryDisplay} />
         <Scene duration={1000} hideNavBar={true} animation={'fade'} key="StoryPlayer" component={StoryPlayer} />
