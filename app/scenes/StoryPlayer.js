@@ -5,10 +5,13 @@ import Dimensions from 'Dimensions';
 import RNFetchBlob from 'react-native-fetch-blob'
 import Sound from 'react-native-sound';
 import { Actions } from 'react-native-router-flux';
-import { store } from '../index'
 import { formatDuration } from '../core/story_core'
-import { Colors, ThemeBorderColors, ThemeTintColors } from '../stylesheets/theme';
+import { Colors } from '../stylesheets/theme';
 import { randomProperty } from '../core/story_core'
+import { Animated, Easing } from 'react-native';
+import { colorSequencer } from '../core/sequence_core';
+
+
 
 
 class StoryPlayer extends Component {
@@ -25,6 +28,7 @@ class StoryPlayer extends Component {
             seconds_remaining: -1
         };
         this.countDownId = null;
+        this.colorValue = new Animated.Value(0);
     }
 
     componentDidMount() {
@@ -60,6 +64,7 @@ class StoryPlayer extends Component {
         BackAndroid.removeEventListener('hardwareBackPress');
         clearTimeout(this.countDownId);
     }
+
 
 
     _pressBack() {
@@ -104,7 +109,7 @@ class StoryPlayer extends Component {
         var id = setTimeout(()=> {
            Actions.popTo('Landing')
         }, 300000);
-        store.dispatch({type: 'SET_TIMEOUT_ID', timeoutId: id});
+        this.props.dispatch({type: 'SET_TIMEOUT_ID', timeoutId: id});
     }
 
 
@@ -159,14 +164,14 @@ class StoryPlayer extends Component {
 
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity onPress={this.play.bind(this)}>
-                        <Image
-                            style={styles.button}
+                        <Animated.Image
+                            style={[{tintColor: colorSequencer.colorValueInt}, styles.button]}
                             source={playUri}/>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.audioTrackingContainer}>
                     <Image
-                        style={styles.playingImg}
+                        style={[styles.playingImg]}
                         source={playImg}/>
                 </View>
             </View>
@@ -239,8 +244,6 @@ const styles = {
         alignItems: "center"
     },
     playingImg: {
-        // flex: 1,
-        // resizeMode: "stretch",
         width: Dimensions.get("window").width + 100
     }
 
@@ -249,7 +252,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
     return {
-        stories: state.get('stories')
+        stories: state.getIn(['stories', 'stories'])
     }
 };
 
