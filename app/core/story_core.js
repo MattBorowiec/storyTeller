@@ -8,7 +8,7 @@ export function setFeaturedStories(state, featuredStories) {
 
 
 export function fetchStories(pageNum) {
-    var url = 'https://storybox-145021.appspot.com/api/audio/list?page=' + pageNum || 0;
+    var url = 'https://api.curiousear.com/audio/list?page=' + pageNum || 0;
     return fetch(url, {
         method: 'get',
     }).then((res) => {
@@ -20,7 +20,7 @@ export function fetchStories(pageNum) {
 
 
 export function fetchFeaturedStories() {
-    var url = 'https://storybox-145021.appspot.com/api/audio/featured';
+    var url = 'https://api.curiousear.com/audio/featured';
     return fetch(url, {
         method: 'get',
     }).then((res) => {
